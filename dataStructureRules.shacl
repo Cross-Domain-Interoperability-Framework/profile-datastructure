@@ -97,25 +97,25 @@ cdifd:CDIFDefinedTermShape a sh:NodeShape ;
             sh:path schema:termCode ;
             sh:severity sh:Info ] ;
     sh:target [ a sh:SPARQLTarget ;
-            sh:select """\r
-      PREFIX schema: <http://schema.org/>\r
-      SELECT DISTINCT ?this\r
-        WHERE {\r
-        ?this a schema:DefinedTerm .\r
-        {\r
-          ?this schema:name "example defined term" .\r
-          FILTER NOT EXISTS { ?s ?p ?this . }\r
-        }\r
-        Union\r
-        {\r
-         VALUES ?p {\r
-            schema:linkRelationship\r
-            schema:measurementTechnique\r
-            schema:keywords\r
-            schema:name\r
-          }\r
-         ?s ?p ?this .\r
-        }\r
+            sh:select """
+      PREFIX schema: <http://schema.org/>
+      SELECT DISTINCT ?this
+        WHERE {
+        ?this a schema:DefinedTerm .
+        {
+          ?this schema:name "example defined term" .
+          FILTER NOT EXISTS { ?s ?p ?this . }
+        }
+        Union
+        {
+         VALUES ?p {
+            schema:linkRelationship
+            schema:measurementTechnique
+            schema:keywords
+            schema:name
+          }
+         ?s ?p ?this .
+        }
       }""" ] .
 
 cdifd:CDIFIdentifierShape a sh:NodeShape ;
@@ -135,19 +135,19 @@ cdifd:CDIFIdentifierShape a sh:NodeShape ;
             sh:path schema:propertyID ;
             sh:severity sh:Warning ] ;
     sh:target [ a sh:SPARQLTarget ;
-            sh:select """\r
-      PREFIX schema: <http://schema.org/>\r
-      SELECT DISTINCT ?this\r
-        WHERE {\r
-        ?this a schema:PropertyValue .\r
-        {\r
-          ?this schema:propertyID "example identifier" .\r
-          FILTER NOT EXISTS { ?s ?p ?this . }\r
-        }\r
-        Union\r
-        {\r
-          ?s schema:identifier ?this .\r
-        }\r
+            sh:select """
+      PREFIX schema: <http://schema.org/>
+      SELECT DISTINCT ?this
+        WHERE {
+        ?this a schema:PropertyValue .
+        {
+          ?this schema:propertyID "example identifier" .
+          FILTER NOT EXISTS { ?s ?p ?this . }
+        }
+        Union
+        {
+          ?s schema:identifier ?this .
+        }
       }""" ] .
 
 cdifd:CDIFIdentifierTypeTermShape a sh:NodeShape ;
@@ -166,14 +166,14 @@ cdifd:CDIFIdentifierTypeTermShape a sh:NodeShape ;
     sh:target [ a sh:SPARQLTarget ;
             sh:prefixes ( [ sh:namespace "http://schema.org/" ;
                         sh:prefix "schema" ] ) ;
-            sh:select """\r
-      PREFIX schema: <http://schema.org/>\r
-      SELECT DISTINCT ?this\r
-        WHERE {\r
-          ?this a schema:DefinedTerm .\r
-          FILTER (\r
-            EXISTS { ?s schema:propertyID ?this . }\r
-          )\r
+            sh:select """
+      PREFIX schema: <http://schema.org/>
+      SELECT DISTINCT ?this
+        WHERE {
+          ?this a schema:DefinedTerm .
+          FILTER (
+            EXISTS { ?s schema:propertyID ?this . }
+          )
         }""" ] .
 
 cdifd:cdifDataStructure_DataStructureShape a sh:NodeShape ;
@@ -212,7 +212,7 @@ cdifd:cdifDataStructure_WideDataStructureShape a sh:NodeShape ;
     sh:targetClass cdi:WideDataStructure .
 
 cdifd:cdifDataStructure_inlineStructureShape a sh:NodeShape ;
-    sh:sparql [ sh:message "A self-contained data-structure description must define the structure inline: a distribution's cdi:isStructuredBy must carry cdi:has_DataStructureComponent, not be a bare @id reference." ;
+    sh:sparql [ sh:message "A distribution's cdi:isStructuredBy must resolve to a structure that carries cdi:has_DataStructureComponent. The components may be written inline or on a node identified by @id elsewhere in the same document -- in RDF both denote the same node, and this rule is satisfied either way. What it rejects is a reference to a structure that is never defined." ;
             sh:select """
 			SELECT $this WHERE {
 				$this <http://schema.org/distribution> ?dist .
@@ -339,12 +339,12 @@ cdifd:cdifVariableDescriptorComponentShape a sh:NodeShape ;
 
 <https://cdif.org/validation/0.1/skos#conceptBroaderNotSelfShape> a sh:NodeShape ;
     sh:sparql [ sh:message "A Concept must not declare itself as skos:broader (reflexive hierarchy)." ;
-            sh:select """\r
-            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\r
-            SELECT $this\r
-            WHERE {\r
-                $this skos:broader $this .\r
-            }\r
+            sh:select """
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            SELECT $this
+            WHERE {
+                $this skos:broader $this .
+            }
         """ ] ;
     sh:targetClass skos:Concept .
 

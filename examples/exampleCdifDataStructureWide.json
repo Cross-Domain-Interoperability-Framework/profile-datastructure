@@ -16,7 +16,7 @@
         "cdi:IdentifierComponent"
       ],
       "@id": "ex:struct/vitalsWide/comp/patientId",
-      "cdif:isDefinedBy_RepresentedVariable": {
+      "cdif:isDefinedBy_Variable": {
         "@type": [
           "cdi:RepresentedVariable"
         ],
@@ -32,7 +32,7 @@
         "cdi:MeasureComponent"
       ],
       "@id": "ex:struct/vitalsWide/comp/systolicBP",
-      "cdif:isDefinedBy_RepresentedVariable": {
+      "cdif:isDefinedBy_Variable": {
         "@type": [
           "cdi:RepresentedVariable"
         ],
@@ -49,7 +49,7 @@
         "cdi:MeasureComponent"
       ],
       "@id": "ex:struct/vitalsWide/comp/diastolicBP",
-      "cdif:isDefinedBy_RepresentedVariable": {
+      "cdif:isDefinedBy_Variable": {
         "@type": [
           "cdi:RepresentedVariable"
         ],
@@ -66,7 +66,7 @@
         "cdi:MeasureComponent"
       ],
       "@id": "ex:struct/vitalsWide/comp/heartRate",
-      "cdif:isDefinedBy_RepresentedVariable": {
+      "cdif:isDefinedBy_Variable": {
         "@type": [
           "cdi:RepresentedVariable"
         ],
@@ -83,7 +83,7 @@
         "cdi:AttributeComponent"
       ],
       "@id": "ex:struct/vitalsWide/comp/observedAt",
-      "cdif:isDefinedBy_RepresentedVariable": {
+      "cdif:isDefinedBy_Variable": {
         "@type": [
           "cdi:RepresentedVariable"
         ],

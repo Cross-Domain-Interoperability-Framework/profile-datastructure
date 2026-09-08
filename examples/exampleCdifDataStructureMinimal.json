@@ -14,7 +14,7 @@
         "cdi:IdentifierComponent"
       ],
       "@id": "ex:struct/observations/comp/observationId",
-      "cdif:isDefinedBy_RepresentedVariable": {
+      "cdif:isDefinedBy_Variable": {
         "@type": [
           "cdi:RepresentedVariable"
         ],
@@ -30,7 +30,7 @@
         "cdi:MeasureComponent"
       ],
       "@id": "ex:struct/observations/comp/observationValue",
-      "cdif:isDefinedBy_RepresentedVariable": {
+      "cdif:isDefinedBy_Variable": {
         "@type": [
           "cdi:RepresentedVariable"
         ],

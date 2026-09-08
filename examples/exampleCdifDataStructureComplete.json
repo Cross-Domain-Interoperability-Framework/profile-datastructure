@@ -16,7 +16,7 @@
         "cdi:IdentifierComponent"
       ],
       "@id": "ex:struct/vitalsLong/comp/patientId",
-      "cdif:isDefinedBy_RepresentedVariable": {
+      "cdif:isDefinedBy_Variable": {
         "@type": [
           "cdi:RepresentedVariable"
         ],
@@ -70,7 +70,7 @@
         "cdi:VariableValueComponent"
       ],
       "@id": "ex:struct/vitalsLong/comp/measureValue",
-      "cdif:isDefinedBy_RepresentedVariable": {
+      "cdif:isDefinedBy_Variable": {
         "@type": [
           "cdi:RepresentedVariable"
         ],
@@ -91,7 +91,7 @@
           "@id": "ex:struct/vitalsLong/comp/measureValue"
         }
       ],
-      "cdif:isDefinedBy_RepresentedVariable": {
+      "cdif:isDefinedBy_Variable": {
         "@type": [
           "cdi:RepresentedVariable"
         ],

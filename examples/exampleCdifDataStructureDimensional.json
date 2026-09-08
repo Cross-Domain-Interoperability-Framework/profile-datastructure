@@ -17,7 +17,7 @@
         "cdi:DimensionComponent"
       ],
       "@id": "ex:struct/salesCube/comp/country",
-      "cdif:isDefinedBy_RepresentedVariable": {
+      "cdif:isDefinedBy_Variable": {
         "@type": [
           "cdi:RepresentedVariable"
         ],
@@ -33,7 +33,7 @@
         "cdi:DimensionComponent"
       ],
       "@id": "ex:struct/salesCube/comp/quarter",
-      "cdif:isDefinedBy_RepresentedVariable": {
+      "cdif:isDefinedBy_Variable": {
         "@type": [
           "cdi:RepresentedVariable"
         ],
@@ -49,7 +49,7 @@
         "cdi:DimensionComponent"
       ],
       "@id": "ex:struct/salesCube/comp/productCategory",
-      "cdif:isDefinedBy_RepresentedVariable": {
+      "cdif:isDefinedBy_Variable": {
         "@type": [
           "cdi:RepresentedVariable"
         ],
@@ -65,7 +65,7 @@
         "cdi:MeasureComponent"
       ],
       "@id": "ex:struct/salesCube/comp/salesAmount",
-      "cdif:isDefinedBy_RepresentedVariable": {
+      "cdif:isDefinedBy_Variable": {
         "@type": [
           "cdi:RepresentedVariable"
         ],
@@ -100,7 +100,7 @@
           "@id": "ex:struct/salesCube/comp/salesAmount"
         }
       ],
-      "cdif:isDefinedBy_RepresentedVariable": {
+      "cdif:isDefinedBy_Variable": {
         "@type": [
           "cdi:RepresentedVariable"
         ],

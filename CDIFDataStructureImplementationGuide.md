@@ -568,7 +568,7 @@ These classes appear in the DataStructure UML model because the profile referenc
 
 [↑ Back to TOC](#table-of-contents)
 
-*Authoritative definition: [CDIF Core profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-core/blob/reviewRevision202606/CDIFCoreImplementationGuide.md#dcatcatalogrecord).*
+*Authoritative definition: [CDIF Core profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-core/blob/main/CDIFCoreImplementationGuide.md#dcatcatalogrecord).*
 
 - The class used to provide information about the metadata record itself. Used here as the type of the `schema:subjectOf` node that carries the profile's `dcterms:conformsTo` declaration.
 
@@ -628,7 +628,7 @@ These classes appear in the DataStructure UML model because the profile referenc
 
 [↑ Back to TOC](#table-of-contents)
 
-*Authoritative definition: [CDIF Core profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-core/blob/reviewRevision202606/CDIFCoreImplementationGuide.md#data-download).*
+*Authoritative definition: [CDIF Core profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-core/blob/main/CDIFCoreImplementationGuide.md#data-download).*
 
 - File-based access to a resource via URL. The DataDownload object provides a link to the resource content along with information about the serialization format and conventions. The Data Structure profile adds `cdi:isStructuredBy` to this class (see [Properties added](#properties-added-to-schemadatadownload) above).
 
@@ -692,7 +692,7 @@ These classes appear in the DataStructure UML model because the profile referenc
 
 [↑ Back to TOC](#table-of-contents)
 
-*Authoritative definition: [CDIF Core profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-core/blob/reviewRevision202606/CDIFCoreImplementationGuide.md#defined-term).*
+*Authoritative definition: [CDIF Core profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-core/blob/main/CDIFCoreImplementationGuide.md#defined-term).*
 
 - A term from a controlled vocabulary. Used as the value type for `cdi:semantic`, unit-of-measure, and similar properties when the term is supplied as a structured object rather than a bare IRI string.
 
@@ -768,7 +768,7 @@ These classes appear in the DataStructure UML model because the profile referenc
 
 [↑ Back to TOC](#table-of-contents)
 
-*Authoritative definition: [CDIF Data Description profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-datadescription/blob/reviewRevision202606/CDIFDataDescriptionImplementationGuide.md#cdifconceptorterm).*
+*Authoritative definition: [CDIF Data Description profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-datadescription/blob/main/CDIFDataDescriptionImplementationGuide.md#cdifconceptorterm).*
 
 - A shared `$defs` type that accepts any of: an `@id` object reference, an inline `schema:DefinedTerm`, or a `skos:Concept` as defined in the CDIF Concept Scheme profile. Used wherever a property value can be either an external controlled-vocabulary concept or an inline definedTerm.
 
@@ -833,7 +833,7 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 
 [↑ Back to TOC](#table-of-contents)
 
-*Authoritative definition: [CDIF Data Description profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-datadescription/blob/reviewRevision202606/CDIFDataDescriptionImplementationGuide.md#cdisentinelvaluedomain-cdisubstantivevaluedomain).*
+*Authoritative definition: [CDIF Data Description profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-datadescription/blob/main/CDIFDataDescriptionImplementationGuide.md#cdisentinelvaluedomain-cdisubstantivevaluedomain).*
 
 - The substantive (meaningful-value) domain of a `cdif:RepresentedVariable`. Differs from `cdi:SentinelValueDomain` only in the `@type` value: `cdi:SubstantiveValueDomain` vs. `cdi:SentinelValueDomain`. May be an enumerated codelist or a value space described via `cdif:ValueAndConceptDescription`.
 
@@ -870,7 +870,7 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 
 [↑ Back to TOC](#table-of-contents)
 
-*Authoritative definition: [CDIF Data Description profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-datadescription/blob/reviewRevision202606/CDIFDataDescriptionImplementationGuide.md#cdisentinelvaluedomain-cdisubstantivevaluedomain).*
+*Authoritative definition: [CDIF Data Description profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-datadescription/blob/main/CDIFDataDescriptionImplementationGuide.md#cdisentinelvaluedomain-cdisubstantivevaluedomain).*
 
 - The sentinel (missing / not-applicable / N/A code) value domain of a `cdif:RepresentedVariable`. Property set is the same as `cdi:SubstantiveValueDomain` (see above); only the `@type` differs (`cdi:SentinelValueDomain`). A represented variable may have multiple sentinel domains referenced from `cdi:takesSentinelValuesFrom`.
 
@@ -878,7 +878,7 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 
 [↑ Back to TOC](#table-of-contents)
 
-*Authoritative definition: [CDIF Data Description profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-datadescription/blob/reviewRevision202606/CDIFDataDescriptionImplementationGuide.md#cdifenumerationdomain).*
+*Authoritative definition: [CDIF Data Description profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-datadescription/blob/main/CDIFDataDescriptionImplementationGuide.md#cdifenumerationdomain).*
 
 - A wrapper acting as an extension point that allows a CDIF Codelist to be documented as an enumerated value domain.
 
@@ -910,7 +910,7 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 
 [↑ Back to TOC](#table-of-contents)
 
-*Authoritative definition: [CDIF Codelist profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-codelist/blob/reviewRevision202606/CDIFCodelistImplementationGuide.md).*
+*Authoritative definition: [CDIF Codelist profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-codelist/blob/main/CDIFCodelistImplementationGuide.md).*
 
 - A SKOS Concept constrained for CDIF codelist use. Must have a resolvable `@id`, `skos:inScheme`, `skos:notation`, and `skos:prefLabel`. Because JSON-LD is an open-world implementation, any other SKOS properties may be included. Used here as the value type of the codelist concepts that populate a `cdif:EnumerationDomain` referenced from a `cdi:SubstantiveValueDomain`.
 
@@ -960,7 +960,7 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 
 [↑ Back to TOC](#table-of-contents)
 
-*Authoritative definition: [CDIF Data Description profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-datadescription/blob/reviewRevision202606/CDIFDataDescriptionImplementationGuide.md#cdifvalueandconceptdescription).*
+*Authoritative definition: [CDIF Data Description profile](https://github.com/Cross-Domain-Interoperability-Framework/profile-datadescription/blob/main/CDIFDataDescriptionImplementationGuide.md#cdifvalueandconceptdescription).*
 
 - A formal description of a set of values — used when the substantive value domain is non-enumerated and must be characterized by patterns, ranges, expressions, or classification level rather than a discrete list.
 

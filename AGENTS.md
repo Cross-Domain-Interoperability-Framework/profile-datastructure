@@ -54,4 +54,4 @@ Pass `--frame` explicitly only to override auto-selection.
 
 ## Development branch
 
-Active development for the 2026-06 review revision targets the `reviewRevision202606` branch; merged to `main` on release.
+Active development for the 2026-06 review revision targets the `updates` branch; merged to `main` on release.

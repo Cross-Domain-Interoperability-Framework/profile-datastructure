@@ -27,23 +27,6 @@ cdifd:CDIFCodelistConceptShape a sh:NodeShape ;
             sh:path skos:prefLabel ] ;
     sh:targetClass skos:Concept .
 
-cdifd:CDIFCodelistConformsToShape a sh:NodeShape ;
-    sh:property [ a sh:PropertyShape ;
-            sh:hasValue <https://w3id.org/cdif/codelist/1.1> ;
-            sh:message "A subjectOf catalog record on a CDIF codelist must include dcterms:conformsTo <https://w3id.org/cdif/codelist/1.1>." ;
-            sh:minCount 1 ;
-            sh:path dcterms:conformsTo ] ;
-    sh:target [ a sh:SPARQLTarget ;
-            sh:prefixes cdifd: ;
-            sh:select """
-                PREFIX schema: <http://schema.org/>
-                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-                SELECT ?this WHERE {
-                    ?dataset schema:subjectOf ?this .
-                    ?dataset a skos:ConceptScheme .
-                }
-            """ ] .
-
 cdifd:CDIFCodelistShape a sh:NodeShape ;
     sh:message "A CDIF codelist must have a resolvable IRI as @id.",
         "Either schema:license or schema:conditionsOfAccess must be provided." ;
@@ -69,6 +52,26 @@ cdifd:CDIFCodelistShape a sh:NodeShape ;
             sh:minCount 1 ;
             sh:path skos:hasTopConcept ] ;
     sh:targetClass skos:ConceptScheme .
+
+cdifd:CDIFDataStructureConformsToShape a sh:NodeShape ;
+    sh:property [ a sh:PropertyShape ;
+            sh:hasValue <https://w3id.org/cdif/data_structure/1.1> ;
+            sh:message "A catalog record on a dataset using CDIF data structure properties should include dcterms:conformsTo <https://w3id.org/cdif/data_structure/1.1>." ;
+            sh:minCount 1 ;
+            sh:path dcterms:conformsTo ;
+            sh:severity sh:Warning ] ;
+    sh:target [ a sh:SPARQLTarget ;
+            sh:prefixes cdifd: ;
+            sh:select """
+			PREFIX schema: <http://schema.org/>
+			PREFIX dcat: <http://www.w3.org/ns/dcat#>
+			SELECT ?this WHERE {
+				?subject schema:subjectOf ?this .
+				?subject a schema:Dataset .
+				?this schema:additionalType ?at .
+				FILTER( ?at = dcat:CatalogRecord || STR(?at) = "dcat:CatalogRecord" )
+			}
+		""" ] .
 
 cdifd:CDIFDefinedTermShape a sh:NodeShape ;
     sh:message "A DefinedTerm must have a name (label), an identifier, OR a termCode. All three are recommended." ;

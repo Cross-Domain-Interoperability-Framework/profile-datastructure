@@ -1,5 +1,6 @@
 @prefix cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/> .
 @prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <http://schema.org/> .
@@ -242,6 +243,36 @@ cdifd:CDIFLabeledLinkShape a sh:NodeShape ;
             sh:pattern "^https?:\\/\\/[^\\s]+$" ] ;
     sh:targetClass schema:CreativeWork .
 
+cdifd:CDIFRelationShape a sh:NodeShape ;
+    sh:message "A relation link must carry a resolvable schema:url. dcterms:relation (URI of the related resource) and dcat:hadRole (SKOS-typed role) are recommended when the relation distinguishes the related resource from its presentation URL or carries an explicit role." ;
+    sh:property [ a sh:PropertyShape ;
+            sh:datatype xsd:string ;
+            sh:message "A relation link must have at least one schema:url that resolves over http(s)." ;
+            sh:minCount 1 ;
+            sh:path schema:url ;
+            sh:pattern "^https?://[^\\s]+$" ],
+        [ a sh:PropertyShape ;
+            sh:class skos:Concept ;
+            sh:message "If dcat:hadRole is provided, its value must be a skos:Concept classifying the role of the related resource." ;
+            sh:path dcat:hadRole ;
+            sh:severity sh:Warning ],
+        [ a sh:PropertyShape ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:message "If dcterms:relation is provided, it must be a syntactically valid URI." ;
+            sh:path dcterms:relation ;
+            sh:pattern "^[a-zA-Z][a-zA-Z0-9+.-]*:[^\\s]*$" ;
+            sh:severity sh:Warning ],
+        [ a sh:PropertyShape ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path schema:name ],
+        [ a sh:PropertyShape ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path schema:description ] ;
+    sh:targetClass dcat:Relationship .
+
 cdifd:CDIFVariableMeasuredShape a sh:NodeShape ;
     sh:property [ sh:message "a propertID must be a uri reference, a name string, or a schema:DefinedTerm" ;
             sh:minCount 1 ;
@@ -351,8 +382,8 @@ cdifd:InstanceVariableRepresentedVariableExclusivityShape a sh:NodeShape ;
             sh:message "cdi:measures is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
             sh:path cdi:measures ],
         [ sh:maxCount 0 ;
-            sh:message "cdi:externalDefinition is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
-            sh:path cdi:externalDefinition ],
+            sh:message "cdif:externalDefinition is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
+            sh:path <https://w3id.org/cdif/externalDefinition> ],
         [ sh:maxCount 0 ;
             sh:message "cdif:uses_Concept is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
             sh:path <https://w3id.org/cdif/uses_Concept> ],

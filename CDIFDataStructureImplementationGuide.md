@@ -241,7 +241,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Cardinality:** Optional
 * **Content:** string. Identifier for this node in the rdf graph.
 
-### cdif:isDefinedBy_RepresentedVariable
+### cdif:isDefinedBy_Variable
 
 * **Cardinality:** Optional
 * **Content:** `cdif:RepresentedVariable` inline or `@id` reference. Logical variable that contains values for this component.
@@ -279,7 +279,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Cardinality:** Optional
 * **Content:** string. Identifier for this node in the rdf graph.
 
-### cdif:isDefinedBy_RepresentedVariable
+### cdif:isDefinedBy_Variable
 
 * **Cardinality:** Required
 * **Content:** `cdif:RepresentedVariable` inline or `@id` reference. Logical variable that contains values for this component.
@@ -300,7 +300,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Cardinality:** Optional
 * **Content:** string, identifier for this node in the rdf graph.
 
-### cdif:isDefinedBy_RepresentedVariable
+### cdif:isDefinedBy_Variable
 
 * **Cardinality:** Required
 * **Content:** `cdif:RepresentedVariable` inline or `@id` reference. Logical variable that contains values for this component.
@@ -321,7 +321,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Cardinality:** Optional
 * **Content:** string. Identifier for this node in the rdf graph.
 
-### cdif:isDefinedBy_RepresentedVariable
+### cdif:isDefinedBy_Variable
 
 * **Cardinality:** Optional
 * **Content:** `cdif:RepresentedVariable` inline or `@id` reference. Logical variable that contains values for this component.
@@ -394,7 +394,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Cardinality:** Optional
 * **Content:** string. Identifier for this node in the rdf graph.
 
-### cdif:isDefinedBy_RepresentedVariable
+### cdif:isDefinedBy_Variable
 
 * **Cardinality:** Optional
 * **Content:** `cdif:RepresentedVariable` inline or `@id` reference. Logical variable that contains values for this component.

@@ -647,7 +647,7 @@ These classes appear in the DataStructure UML model because the profile referenc
 * **Content:** Person or Organization
 * **Description:** The agent that maintains the metadata, with contact information.
 
-### sdDatePublished
+### schema:sdDatePublished
 
 * **Cardinality:** Optional
 * **Content:** ISO 8601 date/datetime

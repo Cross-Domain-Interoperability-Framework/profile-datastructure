@@ -22,212 +22,6 @@
     "schema:Dataset",
     "schema:Product"
   ],
-  "cdi:isStructuredBy": {
-    "@id": "ex:testComplexStructure_346",
-    "@type": [
-      "cdi:DimensionalDataStructure"
-    ],
-    "cdi:has_DataStructureComponent": [
-      {
-        "@type": [
-          "http://example.org/base/DimensionComponent"
-        ],
-        "cdi:isDefinedBy_InstanceVariable": {
-          "@id": "xas:Monochromator_Energy_Variable",
-          "@type": [
-            "cdi:InstanceVariable",
-            "schema:PropertyValue"
-          ],
-          "schema:maxValue": 7380.83,
-          "schema:minValue": 7052,
-          "schema:name": "energy",
-          "schema:propertyID": [
-            "xas:Monochromator_Energy"
-          ],
-          "schema:unitText": "eV",
-          "schame:alternateName": [
-            "Monochromator energy",
-            "mono energy"
-          ]
-        }
-      },
-      {
-        "@type": [
-          "http://example.org/base/MeasureComponent"
-        ],
-        "cdi:isDefinedBy_InstanceVariable": {
-          "@id": "xas:Incident_Intensity_Variable",
-          "@type": [
-            "http://example.org/base/InstanceVariable",
-            "schema:PropertyValue"
-          ],
-          "schema:alternateName": "Monitor intensity",
-          "schema:name": "i0",
-          "schema:propertyID": "xas:Incident_Intensity",
-          "schema:unitText": "counts"
-        }
-      },
-      {
-        "@type": [
-          "http://example.org/base/MeasureComponent"
-        ],
-        "cdi:isDefinedBy_InstanceVariable": {
-          "@id": "xas:Fluorescence_Intensity_Variable",
-          "@type": [
-            "cdi:InstanceVariable",
-            "schema:PropertyValue"
-          ],
-          "schema:alternateName": [
-            "fluorescence intensity"
-          ],
-          "schema:name": "ifluor",
-          "schema:propertyID": [
-            "xas:Fluorescence_Intensity"
-          ],
-          "schema:unitText": "counts"
-        }
-      },
-      {
-        "@type": [
-          "http://example.org/base/MeasureComponent"
-        ],
-        "cdi:isDefinedBy_InstanceVariable": {
-          "@id": "xas:Fluorescence_Absorption_Coefficient_Variable"
-        }
-      },
-      {
-        "@id": "xas:nxXasRawData",
-        "@type": [
-          "cdi:WideDataStructure"
-        ],
-        "cdifq:nColumns": 9,
-        "cdifq:nRows": 443,
-        "cdi:has_DataStructureComponent": [
-          {
-            "@type": [
-              "cdi:IdentifierComponent"
-            ],
-            "cdi:has_ValueMappingPosition": 0,
-            "cdif:isDefinedBy_RepresentedVariable": [
-              {
-                "@id": "xas:Monochromator_Energy_Variable"
-              }
-            ],
-            "cdi:name": "energy"
-          },
-          {
-            "@type": [
-              "cdi:MeasureComponent"
-            ],
-            "cdi:has_ValueMappingPosition": 1,
-            "cdif:isDefinedBy_RepresentedVariable": [
-              {
-                "@id": "xas:tscaler_Variable"
-              }
-            ],
-            "cdi:name": "tscaler"
-          },
-          {
-            "@type": [
-              "cdi:MeasureComponent"
-            ],
-            "cdi:has_ValueMappingPosition": 2,
-            "cdif:isDefinedBy_RepresentedVariable": [
-              {
-                "@id": "xas:Incident_Intensity_Variable"
-              }
-            ],
-            "cdi:name": "i0"
-          },
-          {
-            "@type": [
-              "cdi:MeasureComponent"
-            ],
-            "cdi:has_ValueMappingPosition": 3,
-            "cdif:isDefinedBy_RepresentedVariable": [
-              {
-                "@id": "xas:i1_Variable"
-              }
-            ],
-            "cdi:name": "i1"
-          },
-          {
-            "@type": [
-              "cdi:MeasureComponent"
-            ],
-            "cdi:has_ValueMappingPosition": 4,
-            "cdif:isDefinedBy_RepresentedVariable": [
-              {
-                "@id": "xas:i2_Variable"
-              }
-            ],
-            "cdi:name": "i2"
-          },
-          {
-            "@type": [
-              "cdi:MeasureComponent"
-            ],
-            "cdi:has_ValueMappingPosition": 5,
-            "cdif:isDefinedBy_RepresentedVariable": [
-              {
-                "@id": "xas:sum_outputcounts_Variable"
-              }
-            ],
-            "cdi:name": "sum_outputcounts"
-          },
-          {
-            "@type": [
-              "cdi:MeasureComponent"
-            ],
-            "cdi:has_ValueMappingPosition": 6,
-            "cdif:isDefinedBy_RepresentedVariable": [
-              {
-                "@id": "xas:sum_fe_ka_Variable"
-              }
-            ],
-            "cdi:name": "sum_fe_ka"
-          },
-          {
-            "@type": [
-              "cdi:MeasureComponent"
-            ],
-            "cdi:has_ValueMappingPosition": 7,
-            "cdif:isDefinedBy_RepresentedVariable": [
-              {
-                "@id": "xas:outputcounts_mcal_Variable"
-              }
-            ],
-            "cdi:name": "outputcounts_mca1"
-          },
-          {
-            "@type": [
-              "cdi:MeasureComponent"
-            ],
-            "cdi:has_ValueMappingPosition": 8,
-            "cdif:isDefinedBy_RepresentedVariable": [
-              {
-                "@id": "xas:outputcounts_mca2_Variable"
-              }
-            ],
-            "cdi:name": "outputcounts_mca2"
-          }
-        ],
-        "cdi:isDefinedBy_InstanceVariable": {
-          "@id": "xas:Raw_Data_Variable",
-          "@type": [
-            "cdi:InstanceVariable",
-            "schema:PropertyValue"
-          ],
-          "schema:alternateName": [
-            "raw data array"
-          ],
-          "schema:name": "data"
-        },
-        "schema:description": "this is the raw data in an array, represented here as a 35 column table with 443 rows",
-        "schema:name": "data"
-      }
-    ]
-  },
   "schema:contentUrl": "https://millenia.cars.aps.anl.gov/nxxas/MultiSpectrumFiles/FeXAS.nxs",
   "schema:description": "HDF5 file declared to conform with NEXUS NXxas application definition; the described data is one NEXUS entry in this file, which contains 26 total spectra, each as separate NEXUS entry",
   "schema:distribution": [
@@ -235,6 +29,200 @@
       "@type": [
         "schema:DataDownload",
         "cdi:StructuredDataset"
+      ],
+      "cdi:isStructuredBy": [
+        {
+          "@id": "ex:testComplexStructure_346",
+          "@type": [
+            "cdi:DimensionalDataStructure"
+          ],
+          "cdi:has_DataStructureComponent": [
+            {
+              "@type": [
+                "cdi:DimensionComponent"
+              ],
+              "cdif:isDefinedBy_Variable": {
+                "@id": "xas:Monochromator_Energy_Variable",
+                "@type": [
+                  "cdi:InstanceVariable",
+                  "schema:PropertyValue"
+                ],
+                "schema:maxValue": 7380.83,
+                "schema:minValue": 7052,
+                "schema:name": "energy",
+                "schema:propertyID": [
+                  "xas:Monochromator_Energy"
+                ],
+                "schema:unitText": "eV",
+                "schame:alternateName": [
+                  "Monochromator energy",
+                  "mono energy"
+                ]
+              }
+            },
+            {
+              "@type": [
+                "cdi:MeasureComponent"
+              ],
+              "cdif:isDefinedBy_Variable": {
+                "@id": "xas:Incident_Intensity_Variable",
+                "@type": [
+                  "cdi:InstanceVariable",
+                  "schema:PropertyValue"
+                ],
+                "schema:alternateName": [
+                  "Monitor intensity"
+                ],
+                "schema:name": "i0",
+                "schema:propertyID": [
+                  "xas:Incident_Intensity"
+                ],
+                "schema:unitText": "counts"
+              }
+            },
+            {
+              "@type": [
+                "cdi:MeasureComponent"
+              ],
+              "cdif:isDefinedBy_Variable": {
+                "@id": "xas:Fluorescence_Intensity_Variable",
+                "@type": [
+                  "cdi:InstanceVariable",
+                  "schema:PropertyValue"
+                ],
+                "schema:alternateName": [
+                  "fluorescence intensity"
+                ],
+                "schema:name": "ifluor",
+                "schema:propertyID": [
+                  "xas:Fluorescence_Intensity"
+                ],
+                "schema:unitText": "counts"
+              }
+            },
+            {
+              "@type": [
+                "cdi:MeasureComponent"
+              ],
+              "cdif:isDefinedBy_Variable": {
+                "@id": "xas:Fluorescence_Absorption_Coefficient_Variable"
+              }
+            }
+          ]
+        },
+        {
+          "@id": "xas:nxXasRawData",
+          "@type": [
+            "cdi:WideDataStructure"
+          ],
+          "cdifq:nColumns": 9,
+          "cdifq:nRows": 443,
+          "cdi:has_DataStructureComponent": [
+            {
+              "@type": [
+                "cdi:IdentifierComponent"
+              ],
+              "cdi:has_ValueMappingPosition": 0,
+              "cdi:name": "energy",
+              "cdif:isDefinedBy_Variable": {
+                "@id": "xas:Monochromator_Energy_Variable"
+              }
+            },
+            {
+              "@type": [
+                "cdi:MeasureComponent"
+              ],
+              "cdi:has_ValueMappingPosition": 1,
+              "cdi:name": "tscaler",
+              "cdif:isDefinedBy_Variable": {
+                "@id": "xas:tscaler_Variable"
+              }
+            },
+            {
+              "@type": [
+                "cdi:MeasureComponent"
+              ],
+              "cdi:has_ValueMappingPosition": 2,
+              "cdi:name": "i0",
+              "cdif:isDefinedBy_Variable": {
+                "@id": "xas:Incident_Intensity_Variable"
+              }
+            },
+            {
+              "@type": [
+                "cdi:MeasureComponent"
+              ],
+              "cdi:has_ValueMappingPosition": 3,
+              "cdi:name": "i1",
+              "cdif:isDefinedBy_Variable": {
+                "@id": "xas:i1_Variable"
+              }
+            },
+            {
+              "@type": [
+                "cdi:MeasureComponent"
+              ],
+              "cdi:has_ValueMappingPosition": 4,
+              "cdi:name": "i2",
+              "cdif:isDefinedBy_Variable": {
+                "@id": "xas:i2_Variable"
+              }
+            },
+            {
+              "@type": [
+                "cdi:MeasureComponent"
+              ],
+              "cdi:has_ValueMappingPosition": 5,
+              "cdi:name": "sum_outputcounts",
+              "cdif:isDefinedBy_Variable": {
+                "@id": "xas:sum_outputcounts_Variable"
+              }
+            },
+            {
+              "@type": [
+                "cdi:MeasureComponent"
+              ],
+              "cdi:has_ValueMappingPosition": 6,
+              "cdi:name": "sum_fe_ka",
+              "cdif:isDefinedBy_Variable": {
+                "@id": "xas:sum_fe_ka_Variable"
+              }
+            },
+            {
+              "@type": [
+                "cdi:MeasureComponent"
+              ],
+              "cdi:has_ValueMappingPosition": 7,
+              "cdi:name": "outputcounts_mca1",
+              "cdif:isDefinedBy_Variable": {
+                "@id": "xas:outputcounts_mcal_Variable"
+              }
+            },
+            {
+              "@type": [
+                "cdi:MeasureComponent"
+              ],
+              "cdi:has_ValueMappingPosition": 8,
+              "cdi:name": "outputcounts_mca2",
+              "cdif:isDefinedBy_Variable": {
+                "@id": "xas:outputcounts_mca2_Variable"
+              }
+            }
+          ],
+          "cdif:isDefinedBy_Variable": {
+            "@id": "xas:Raw_Data_Variable",
+            "@type": [
+              "cdi:InstanceVariable",
+              "schema:PropertyValue"
+            ],
+            "schema:alternateName": [
+              "raw data array"
+            ],
+            "schema:name": "data"
+          },
+          "schema:description": "this is the raw data in an array, represented here as a 35 column table with 443 rows",
+          "schema:name": "data"
+        }
       ],
       "cdi:allowsDuplicates": false,
       "cdi:has_LocatorMapping": [
@@ -270,7 +258,7 @@
           "cdi:formats": {
             "@id": "xas:Incident_Intensity_Variable",
             "@type": [
-              "http://example.org/base/InstanceVariable",
+              "cdi:InstanceVariable",
               "schema:PropertyValue"
             ],
             "schema:alternateName": "Monitor intensity",

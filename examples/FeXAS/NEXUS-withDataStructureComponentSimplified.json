@@ -54,7 +54,7 @@
                   "xas:Monochromator_Energy"
                 ],
                 "schema:unitText": "eV",
-                "schame:alternateName": [
+                "schema:alternateName": [
                   "Monochromator energy",
                   "mono energy"
                 ]
@@ -244,7 +244,7 @@
               "xas:Monochromator_Energy"
             ],
             "schema:unitText": "eV",
-            "schame:alternateName": [
+            "schema:alternateName": [
               "Monochromator energy",
               "mono energy"
             ]
@@ -350,7 +350,7 @@
         "xas:Monochromator_Energy"
       ],
       "schema:unitText": "eV",
-      "schame:alternateName": [
+      "schema:alternateName": [
         "Monochromator energy",
         "mono energy"
       ]

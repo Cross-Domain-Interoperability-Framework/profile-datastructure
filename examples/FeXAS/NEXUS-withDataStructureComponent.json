@@ -346,7 +346,7 @@
       ],
       "cdif:uses": [
         {
-          "@id": "xas:Monochromator_Energy_Variable"
+          "@id": "xas:Monochromator_Energy"
         }
       ]
     },
@@ -366,7 +366,7 @@
       "schema:unitText": "counts",
       "cdif:uses": [
         {
-          "@id": "xas:Incident_Intensity_Variable"
+          "@id": "xas:Incident_Intensity"
         }
       ]
     },
@@ -386,7 +386,7 @@
       "schema:unitText": "counts",
       "cdif:uses": [
         {
-          "@id": "xas:sum_fe_ka_Variable"
+          "@id": "xas:Fluorescence_Intensity"
         }
       ]
     },
@@ -409,7 +409,7 @@
       "schema:name": "tscaler",
       "cdif:uses": [
         {
-          "@id": "xas:tscaler_Variable"
+          "@id": "xas:tscaler"
         }
       ],
       "@id": "xas:tscaler_IV"
@@ -448,7 +448,7 @@
       "schema:name": "sum outputcounts",
       "cdif:uses": [
         {
-          "@id": "xas:sum_outputcounts_Variable"
+          "@id": "xas:sum_outputcounts"
         }
       ],
       "@id": "xas:sum_outputcounts_IV"
@@ -461,7 +461,7 @@
       "schema:name": "outputcounts mcal",
       "cdif:uses": [
         {
-          "@id": "xas:outputcounts_mcal_Variable"
+          "@id": "xas:outputcounts_mcal"
         }
       ],
       "@id": "xas:outputcounts_mcal_IV"
@@ -474,7 +474,7 @@
       "schema:name": "outputcounts mca2",
       "cdif:uses": [
         {
-          "@id": "xas:outputcounts_mca2_Variable"
+          "@id": "xas:outputcounts_mca2"
         }
       ],
       "@id": "xas:outputcounts_mca2_IV"

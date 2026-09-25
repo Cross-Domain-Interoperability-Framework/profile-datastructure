@@ -405,7 +405,7 @@
       "schema:name": "Incident Intensity",
       "cdif:uses": [
         {
-          "@id": "xas:Incident_Intensity_Variable"
+          "@id": "xas:Incident_Intensity"
         }
       ]
     },
@@ -418,7 +418,7 @@
       "schema:name": "Monochromator Energy",
       "cdif:uses": [
         {
-          "@id": "xas:Monochromator_Energy_Variable"
+          "@id": "xas:Monochromator_Energy"
         }
       ]
     },

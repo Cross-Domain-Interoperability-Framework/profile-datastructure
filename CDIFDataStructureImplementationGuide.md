@@ -33,7 +33,7 @@ See also [graphical presentation of the Data Structure profile model](https://cr
   * [cdif:VariableDescriptorComponent](#cdifvariabledescriptorcomponent)
   * [cdif:VariableValueComponent](#cdifvariablevaluecomponent)
   * [cdi:DimensionGroup](#cdidimensiongroup)
-  * [cdif:PrimaryKey](#cdifprimarykey)
+  * [cdif:Key](#cdifkey)
   * [cdif:ForeignKey](#cdifforeignkey)
   * [cdif:RepresentedVariable](#cdifrepresentedvariable)
   * [schema:Identifier](#schemaidentifier)
@@ -139,13 +139,13 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Content:** array of `cdif:DataStructureComponent` subtype instances or `@id` references.
 * **Description:** The components that make up the data structure. The valid component subtypes depend on the concrete DataStructure subtype — see each subtype below.
 
-### cdi:has_PrimaryKey
+### cdif:has_PrimaryKey
 
 * **Cardinality:** Optional
-* **Content:** inline `cdif:PrimaryKey` or `@id` reference.
+* **Content:** inline `cdif:Key` or `@id` reference.
 * **Description:** Variables in the structure that uniquely identify a record.
 
-### cdi:has_ForeignKey
+### cdif:has_ForeignKey
 
 * **Cardinality:** Optional
 * **Content:** array of inline `cdif:ForeignKey` or `@id` references.
@@ -175,7 +175,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Content:** array of `cdi:DimensionGroup`.
 * **Description:** Groups of dimensions that together address a coordinate position in the cube.
 
-(Inherits `cdi:has_PrimaryKey` and `cdi:has_ForeignKey` from `cdi:DataStructure`.)
+(Inherits `cdif:has_PrimaryKey` and `cdif:has_ForeignKey` from `cdi:DataStructure`.)
 
 ## 
 
@@ -195,7 +195,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Cardinality:** Required (≥1)
 * **Content:** array; each item is one of `cdif:IdentifierComponent`, `cdif:VariableDescriptorComponent`, `cdif:VariableValueComponent`, `cdif:AttributeComponent`.
 
-( cdi:LongDataStructure inherits `cdi:has_PrimaryKey` and `cdi:has_ForeignKey` from `cdi:DataStructure`.)
+( cdi:LongDataStructure inherits `cdif:has_PrimaryKey` and `cdif:has_ForeignKey` from `cdi:DataStructure`.)
 
 ## 
 
@@ -215,7 +215,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Cardinality:** Required (≥1)
 * **Content:** array; each item is one of `cdif:IdentifierComponent`, `cdif:MeasureComponent`, `cdif:AttributeComponent`.
 
-(Inherits `cdi:has_PrimaryKey` and `cdi:has_ForeignKey` from `cdi:DataStructure`.)
+(Inherits `cdif:has_PrimaryKey` and `cdif:has_ForeignKey` from `cdi:DataStructure`.)
 
 ## 
 
@@ -324,7 +324,8 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 ### cdif:isDefinedBy_Variable
 
 * **Cardinality:** Optional
-* **Content:** `cdif:RepresentedVariable` inline or `@id` reference. Logical variable that contains values for this component.
+* **Content:** `cdif:RepresentedVariable` or `cdif:RepresentedVariable` inline or `@id` reference. 
+* **Description:** Logical variable that contains values for this component.
 
 ### cdif:name
 
@@ -362,21 +363,25 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Required
 * **Content:** object — a `cdif:DescriptorVariable` whose values map to the logical variables of the dataset (see Data Description profile).
+* **Description:** link to variable that contains values specifying the semantics of the variableValuecomponent.
 
 ### cdi:refersTo
 
 * **Cardinality:** Optional
 * **Content:** `@id` reference to another `cdif:DataStructureComponent`.
+* **Description:** reference to data structure component that is the object of a attributeComponent.
 
 ### cdi:identifier
 
 * **Cardinality:** Optional
-* **Content:** `@id` reference to a `schema:Identifier`. Identify this component definition in a global context for use in other documents.
+* **Content:** `@id` reference to a `schema:Identifier`. 
+* **Description:** Identify this component definition in a global context for use in other documents.
 
 ### cdi:semantic
 
 * **Cardinality:** Optional
 * **Content:** array; each item is either a string IRI or a `cdifConceptOrTerm`.
+* **Description:** specifies a concept that defines the meaning of a variable.
 
 ## cdif:VariableValueComponent
 
@@ -397,12 +402,14 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 ### cdif:isDefinedBy_Variable
 
 * **Cardinality:** Optional
-* **Content:** `cdif:RepresentedVariable` inline or `@id` reference. Logical variable that contains values for this component.
+* **Content:** `cdif:RepresentedVariable` inline or `@id` reference. 
+* **Description:** Logical variable that contains values for this component.
 
 ### cdi:semantic
 
 * **Cardinality:** Optional
 * **Content:** array; each item is either a string IRI or a `cdifConceptOrTerm`.
+* **Description:** specifies a concept that defines the meaning of a variable.
 
 ## cdi:DimensionGroup
 
@@ -424,17 +431,19 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Optional
 * **Content:** array of `cdif:DimensionComponent` inline or `@id` references.
+* **Description:** specifies a dimension component members of the dimension group.
 
-## cdif:PrimaryKey
+## cdif:Key
 
 [↑ Back to TOC](#table-of-contents)
 
-* An ordered set of represented variables whose values uniquely identify a record in the dataset. Array order in `cdif:isComposedOf` is the key position; no intermediate ComponentPosition wrapper is used.
+* An ordered set of variables whose values uniquely identify a record in the dataset. This is the same `cdif:Key` that `cdif:hasPrimaryKey` takes at dataset level — there is no separate `cdif:PrimaryKey` class, so a structure-level key and a dataset-level key can be one node referenced from both places.
+* Position is **explicit**, in `cdi:value` on a `cdi:ComponentPosition` wrapper. It is not implied by array order.
 
 ### @type
 
 * **Cardinality:** Required
-* **Content:** array of string, contains `cdif:PrimaryKey`.
+* **Content:** array of string, contains `cdif:Key`.
 
 ### @id
 
@@ -444,7 +453,8 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 ### cdif:isComposedOf
 
 * **Cardinality:** Required (≥1)
-* **Content:** array of objects, each carrying a reference to a `cdif:RepresentedVariable` in the data structure and (implicitly via array order) the variable's position in the key.
+* **Content:** array of `cdi:ComponentPosition` objects. Each requires `@type` containing `cdi:ComponentPosition`, `cdi:indexes` (an `@id` reference — an inline variable definition is **not** permitted, because the variable is declared once in `schema:variableMeasured` and referenced from the key), and `cdi:value` (1-based position, default `1`).
+* **Description:** ordered list of positions, each naming one variable in the key.
 
 ## cdif:ForeignKey
 
@@ -465,12 +475,14 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 ### cdif:isComposedOf
 
 * **Cardinality:** Required (≥1)
-* **Content:** array of objects referencing `cdif:RepresentedVariable`s in this data structure, in key order.
+* **Content:** array of `cdi:ComponentPosition` objects, same shape as on `cdif:Key`: `@type`, `cdi:indexes` (`@id` reference only) and `cdi:value` are all required. Until 2026-09-25 only `@type` was required here, so a wrapper naming no variable and no position validated.
+* **Description:** ordered list of positions, each naming one variable in the key.
 
-### cdi:references
+### cdif:references
 
 * **Cardinality:** Required
-* **Content:** `@id` reference to a `cdif:PrimaryKey` in a different dataset.
+* **Content:** `@id` reference to a `cdif:Key` in a different dataset.
+* **Description:** object reference to the target of the foreign key. Required: a foreign key that references nothing is not a foreign key.
 
 ## cdif:RepresentedVariable
 
@@ -492,11 +504,13 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Optional
 * **Content:** array of string
+* **Description:** string used to identify the variable in data.
 
 ### cdif:displayLabel
 
 * **Cardinality:** Optional
 * **Content:** array of string (may be language-tagged)
+* **Description:** Human intelligible string that identifies the variable.
 
 ### cdif:definition
 
@@ -508,16 +522,20 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Optional
 * **Content:** object — reference to an external (e.g., SKOS) definition.
+* **Description:** reference to a semantic resource that defines the variable..
 
 ### cdif:descriptiveText
 
 * **Cardinality:** Optional
 * **Content:** string
+* **Description:** free text explanation of the variable's intention.
 
 ### cdi:identifier
 
 * **Cardinality:** Optional
-* **Content:** `@id` reference to a `schema:Identifier`.  Identify this variable definition in a global context for use in other documents.
+* **Content:** `@id` reference to a `schema:Identifier`. 
+* **Description:** Identify this variable definition in a global context for use in other documents.
+
 
 ### cdi:hasIntendedDataType
 
@@ -529,6 +547,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Optional
 * **Content:** one of: string, `cdifConceptOrTerm` `@id` reference.
+* **Description:** a controlled vocabulary identifier for the unit of measure
 
 ### cdi:simpleUnitOfMeasure
 
@@ -546,6 +565,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Optional
 * **Content:** inline object or `@id` reference to a `cdif:RepresentedVariable`.
+* **Description:** identifiers the unit type that is objects of interest for the variable
 
 ### cdi:takesSubstantiveValuesFrom
 
@@ -562,7 +582,8 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 ### cdif:uses_Concept
 
 * **Cardinality:** Optional
-* **Content:** array of inline objects or `@id` references — concepts this variable expresses or aligns with.
+* **Content:** array of inline objects or `@id` references 
+* **Description:**  concepts this variable expresses or aligns with.
 
 ## schema:Identifier
 
@@ -694,6 +715,7 @@ These classes appear in the DataStructure UML model because the profile referenc
 
 * **Cardinality:** Optional
 * **Content:** string
+* **Description:** free text description of the data download process and product.
 
 ### schema:encodingFormat
 

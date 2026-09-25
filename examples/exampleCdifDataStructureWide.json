@@ -95,9 +95,9 @@
       }
     }
   ],
-  "cdi:has_PrimaryKey": {
+  "cdif:has_PrimaryKey": {
     "@type": [
-      "cdif:PrimaryKey"
+      "cdif:Key"
     ],
     "@id": "ex:struct/vitalsWide/pk",
     "cdif:isComposedOf": [

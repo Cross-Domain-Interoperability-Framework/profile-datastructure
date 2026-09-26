@@ -531,7 +531,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Optional
 * **Content:** object — reference to an external (e.g., SKOS) definition.
-* **Description:** reference to a semantic resource that defines the variable..
+* **Description:** A reference to an external definition of a concept (that is, a concept which is described outside the content of the DDI-CDI metadata description). An example is a SKOS concept. The definition property is assumed to duplicate the external one referenced if externalDefinition is used. Other corresponding properties are assumed to be included unchanged if used.
 
 ### cdif:descriptiveText
 
@@ -562,13 +562,13 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Optional
 * **Content:** string
-* **Description:** Unit expressed as a simple string when no controlled-vocabulary entry is available or needed.
+* **Description:** The unit in which the data values are measured (kg, pound, euro), expressed as a simple string, in cases where no additional information is available (in the legacy system) or needed (as in the case of broad agreement within the community of use [i.e., ISO country codes, currencies, etc. in SDMX])
 
 ### cdi:unitOfMeasureKind
 
 * **Cardinality:** Optional
 * **Content:** one of: string, `cdifConceptOrTerm` `@id` reference.
-* **Description:** Kind of unit (e.g., "temperature", "salinity"), allowing translation between equivalent units.
+* **Description:** Kind of unit of measure, so that it may be prone to translation to equivalent UOMs. Example values include "acceleration," "temperature," "salinity", etc. This description exists at the conceptual level, indicating a limitation on the type of representations which may be used for the variable as it is made more concrete.
 
 ### cdi:measures
 
@@ -592,7 +592,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Optional
 * **Content:** array of inline objects or `@id` references 
-* **Description:**  concepts this variable expresses or aligns with.
+* **Description:** specifies the concept(s) that this variable expresses or aligns with.
 
 ## schema:Identifier
 

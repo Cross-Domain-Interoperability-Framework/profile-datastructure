@@ -168,6 +168,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Required (≥1)
 * **Content:** array; each item is one of `cdif:DimensionComponent`, `cdif:MeasureComponent`, `cdif:AttributeComponent`.
+* **Description:** a list of data structure component object that associate variable with their roles in the data structure
 
 ### cdi:has_DimensionGroup
 
@@ -194,6 +195,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Required (≥1)
 * **Content:** array; each item is one of `cdif:IdentifierComponent`, `cdif:VariableDescriptorComponent`, `cdif:VariableValueComponent`, `cdif:AttributeComponent`.
+* **Description:** a list of data structure component object that associate variable with their roles in the data structure
 
 ( cdi:LongDataStructure inherits `cdif:has_PrimaryKey` and `cdif:has_ForeignKey` from `cdi:DataStructure`.)
 
@@ -214,6 +216,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Required (≥1)
 * **Content:** array; each item is one of `cdif:IdentifierComponent`, `cdif:MeasureComponent`, `cdif:AttributeComponent`.
+* **Description:** a list of data structure component object that associate variable with their roles in the data structure
 
 (Inherits `cdif:has_PrimaryKey` and `cdif:has_ForeignKey` from `cdi:DataStructure`.)
 
@@ -245,6 +248,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Optional
 * **Content:** `cdif:RepresentedVariable` inline or `@id` reference. Logical variable that contains values for this component.
+* **Description:** link (object reference) to variable that contains values for the data structure component
 
 ### cdi:qualifies
 
@@ -256,6 +260,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Optional
 * **Content:** `@id` reference to a `schema:Identifier`. Identify this component definition in a global context for use in other documents.
+* **Description:** an external identifier for the defined data structure component
 
 ### cdi:semantic
 
@@ -283,6 +288,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Required
 * **Content:** `cdif:RepresentedVariable` inline or `@id` reference. Logical variable that contains values for this component.
+* **Description:** link (object reference) to variable that contains values for the data structure component
 
 ## cdif:IdentifierComponent
 
@@ -304,6 +310,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Required
 * **Content:** `cdif:RepresentedVariable` inline or `@id` reference. Logical variable that contains values for this component.
+* **Description:** link (object reference) to variable that contains values for the data structure component
 
 ## cdif:MeasureComponent
 
@@ -337,11 +344,13 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Optional
 * **Content:** `@id` reference to a `schema:Identifier`. Identify this component definition in a global context for use in other documents.
+* **Description:** an external identifier for the defined data structure component
 
 ### cdi:semantic
 
 * **Cardinality:** Optional
 * **Content:** array; each item is either a string IRI or a `cdifConceptOrTerm`.
+* **Description:** a concept, defined term, string, or link (object reference) that specifies the meaning of the data structure component.
 
 ## cdif:VariableDescriptorComponent
 
@@ -768,6 +777,7 @@ These classes appear in the DataStructure UML model because the profile referenc
 
 * **Cardinality:** Required if no `name` or `termCode`
 * **Content:** string.uri or PropertyValue-(identifier)
+* **Description:** an external identifier, ideally a resolvable URI, for the defined term.
 
 ### schema:termCode
 
@@ -820,6 +830,7 @@ These classes appear in the DataStructure UML model because the profile referenc
 
 * **Cardinality:** Optional
 * **Content:** string
+* **Description:** free text description of the unit of measure type.
 
 ## cdifConceptOrTerm
 
@@ -883,6 +894,7 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 
 * **Cardinality:** Required (≥1)
 * **Content:** array of objects. Each item has:
+* **Description:** definition of an enumeration domain that contains valid values to populate the descriptor variable, or a link (object reference) to an enumeration domain.
 
   * **cdif:value** (required, string) — the code as it appears in the descriptor column.
   * **cdif:isDefinedBy** (required) — inline `cdif:RepresentedVariable` or `@id` reference to a represented variable defined elsewhere in the document.

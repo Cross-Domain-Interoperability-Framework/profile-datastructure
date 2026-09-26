@@ -652,6 +652,7 @@ These classes appear in the DataStructure UML model because the profile referenc
 
 * **Cardinality:** Required — `"dcat:CatalogRecord"`, repeatable
 * **Content:** string
+* **Description:** The subjectOf/Dataset with information about the metadata record must have an additional type `dcat:CatalogRecord` declared, to distinguish it from other possible schema:subjectOf or schema:Dataset instances.
 
 ### schema:about
 
@@ -926,9 +927,9 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 
 ### cdif:recommendedDataType
 
-* **Cardinality:** Optional
+* **Cardinality:** Choice-at least one of cdif:recommendedDataType, cdif:takesValuesFrom is required
 * **Content:** array of xsd data type strings.
-* **Description:** Data type(s) recommended for use with this domain.
+* **Description:** One or more XSD data type tokens recommended for values from this domain. Required if `cdif:takesValuesFrom` is not provided; a SubstantiveValueDomain node MUST carry at least one of `cdif:takesValuesFrom` or `cdif:recommendedDataType`.
 
 ### cdi:isDescribedBy
 

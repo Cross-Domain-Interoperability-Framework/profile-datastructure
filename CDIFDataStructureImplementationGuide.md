@@ -372,7 +372,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Required
 * **Content:** object — a `cdif:DescriptorVariable` whose values map to the logical variables of the dataset (see Data Description profile).
-* **Description:** link to variable that contains values specifying the semantics of the variableValuecomponent.
+* **Description:** Variable that provides codes for variable identification in the context of a data structure. Descriptor Variables hold values which reference the logical variables in the data set, indicating which one the associated value in the corresponding Reference Variable is a measure/value for. Descriptor Variables are presentational variables found only in Long Data Sets.
 
 ### cdi:refersTo
 

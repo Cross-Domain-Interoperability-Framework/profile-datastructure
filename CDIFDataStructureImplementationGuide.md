@@ -170,14 +170,6 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Content:** array; each item is one of `cdif:DimensionComponent`, `cdif:MeasureComponent`, `cdif:AttributeComponent`.
 * **Description:** a list of data structure component object that associate variable with their roles in the data structure
 
-### cdi:has_DimensionGroup
-
-* **Cardinality:** Optional
-* **Content:** array of `cdi:DimensionGroup`.
-* **Description:** Groups of dimensions that together address a coordinate position in the cube.
-
-(Inherits `cdif:has_PrimaryKey` and `cdif:has_ForeignKey` from `cdi:DataStructure`.)
-
 ## 
 
 ## cdi:LongDataStructure
@@ -248,13 +240,13 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Optional
 * **Content:** `cdif:RepresentedVariable` inline or `@id` reference. Logical variable that contains values for this component.
-* **Description:** link (object reference) to variable that contains values for the data structure component
+* **Description:** a link (object reference) to the variable that contains values for a data structure component
 
 ### cdi:qualifies
 
 * **Cardinality:** Optional
 * **Content:** array of inline `cdif:DataStructureComponent` or `@id` references.
-* **Description:** Other components that this attribute qualifies.
+* **Description:** Reference to another variable in this dataset that this variable qualifies (provides additional context for; e.g. a measurement-channel attribute qualifying a measure variable).
 
 ### cdi:identifier
 
@@ -288,7 +280,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Required
 * **Content:** `cdif:RepresentedVariable` inline or `@id` reference. Logical variable that contains values for this component.
-* **Description:** link (object reference) to variable that contains values for the data structure component
+* **Description:** a link (object reference) to the variable that contains values for a data structure component
 
 ## cdif:IdentifierComponent
 
@@ -310,7 +302,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Required
 * **Content:** `cdif:RepresentedVariable` inline or `@id` reference. Logical variable that contains values for this component.
-* **Description:** link (object reference) to variable that contains values for the data structure component
+* **Description:** a link (object reference) to the variable that contains values for a data structure component
 
 ## cdif:MeasureComponent
 
@@ -332,7 +324,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Optional
 * **Content:** `cdif:RepresentedVariable` or `cdif:RepresentedVariable` inline or `@id` reference. 
-* **Description:** Logical variable that contains values for this component.
+* **Description:** a link (object reference) to the variable that contains values for a data structure component
 
 ### cdif:name
 
@@ -412,7 +404,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Optional
 * **Content:** `cdif:RepresentedVariable` inline or `@id` reference. 
-* **Description:** Logical variable that contains values for this component.
+* **Description:** a link (object reference) to the variable that contains values for a data structure component
 
 ### cdi:semantic
 
@@ -436,12 +428,6 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Cardinality:** Optional
 * **Content:** string. Identifier for this node in the rdf graph.
 
-### cdi:has_DimensionComponent
-
-* **Cardinality:** Optional
-* **Content:** array of `cdif:DimensionComponent` inline or `@id` references.
-* **Description:** specifies a dimension component members of the dimension group.
-
 ## cdif:Key
 
 [^ Back to TOC](#table-of-contents)
@@ -463,7 +449,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Required (≥1)
 * **Content:** array of `cdi:ComponentPosition` objects. Each requires `@type` containing `cdi:ComponentPosition`, `cdi:indexes` (an `@id` reference — an inline variable definition is **not** permitted, because the variable is declared once in `schema:variableMeasured` and referenced from the key), and `cdi:value` (1-based position, default `1`).
-* **Description:** ordered list of positions, each naming one variable in the key.
+* **Description:** Ordered list of `cdi:ComponentPosition` wrappers, one per key component. Each wrapper holds a `cdi:value` (the 1-based integer position, default `1`) for its position, and `cdi:indexes` (an `@id`-reference to the variable used at that position in the key -- an inline variable definition is **not** permitted)
 
 ## cdif:ForeignKey
 
@@ -485,7 +471,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Required (≥1)
 * **Content:** array of `cdi:ComponentPosition` objects, same shape as on `cdif:Key`: `@type`, `cdi:indexes` (`@id` reference only) and `cdi:value` are all required. Until 2026-09-25 only `@type` was required here, so a wrapper naming no variable and no position validated.
-* **Description:** ordered list of positions, each naming one variable in the key.
+* **Description:** Ordered list of `cdi:ComponentPosition` wrappers, one per key component. Each wrapper holds a `cdi:value` (the 1-based integer position, default `1`) for its position, and `cdi:indexes` (an `@id`-reference to the variable used at that position in the key -- an inline variable definition is **not** permitted)
 
 ### cdif:references
 
@@ -519,15 +505,15 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Optional
 * **Content:** array of string (may be language-tagged)
-* **Description:** Human intelligible string that identifies the variable.
+* **Description:** A human-readable display label for the object for use in user interfaces.
 
 ### cdif:definition
 
 * **Cardinality:** Optional
 * **Content:** string
-* **Description:** Natural-language meaning of the variable. Mutually exclusive with `cdi:externalDefinition`.
+* **Description:** Natural-language meaning of the variable. Mutually exclusive with `cdif:externalDefinition`.
 
-### cdi:externalDefinition
+### cdif:externalDefinition
 
 * **Cardinality:** Optional
 * **Content:** object — reference to an external (e.g., SKOS) definition.
@@ -550,13 +536,13 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Optional
 * **Content:** one of: string IRI, or `cdifConceptOrTerm` `@id` reference.
-* **Description:** Intended physical datatype for variable values.
+* **Description:** The physical datatype intended to be used for values of this variable. Supports the optional use of an external controlled vocabulary.Recommended values are XML Schema datatypes; see [xsdDataType](#xsddatatype)
 
 ### cdi:describedUnitOfMeasure
 
 * **Cardinality:** Optional
 * **Content:** one of: string, `cdifConceptOrTerm` `@id` reference.
-* **Description:** a controlled vocabulary identifier for the unit of measure
+* **Description:** The unit in which the data values are measured (kg, pound, euro), expressed as a value from a controlled system of entries (i.e., QDT). Supports the provision of an identifier for the entry in the authoritative source (a URI, etc.), and the specific vocabulary.
 
 ### cdi:simpleUnitOfMeasure
 
@@ -580,13 +566,13 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Optional
 * **Content:** inline `cdi:SubstantiveValueDomain` or `@id` reference.
-* **Description:** The set of valid, meaningful values for this variable.
+* **Description:** Specifies the set of substantive values for this variable - the set of valid, meaningful values
 
 ### cdi:takesSentinelValuesFrom
 
 * **Cardinality:** Optional
 * **Content:** array of inline `cdi:SentinelValueDomain` or `@id` references.
-* **Description:** Sentinel (missing / not-applicable) values for this variable.
+* **Description:** Sentinel (missing / not-applicable) value domain(s) for this variable. Added at the Data Description profile level; not present at the Discovery level; disallowed at the Data Structure level where the property lives on the RepresentedVariable.
 
 ### cdif:uses_Concept
 
@@ -672,23 +658,11 @@ These classes appear in the DataStructure UML model because the profile referenc
 * **Content:** string
 * **Description:** Other information about the metadata record.
 
-### schema:maintainer
-
-* **Cardinality:** Optional
-* **Content:** Person or Organization
-* **Description:** The agent that maintains the metadata, with contact information.
-
 ### schema:sdDatePublished
 
 * **Cardinality:** Optional
 * **Content:** ISO 8601 date/datetime
 * **Description:** Date of most recent update to the metadata content.
-
-### schema:includedInDataCatalog
-
-* **Cardinality:** Optional
-* **Content:** DataCatalog
-* **Description:** Identifies the source for the origin of the metadata record.
 
 ## schema:DataDownload
 
@@ -709,12 +683,6 @@ These classes appear in the DataStructure UML model because the profile referenc
 * **Cardinality:** Required — `"schema:DataDownload"`, other types optional
 * **Content:** string.uri
 
-### schema:contentUrl
-
-* **Cardinality:** Required
-* **Content:** string.uri
-* **Description:** HTTP URL that directly GETs the content of the resource described by this metadata record, in the format specified by `schema:encodingFormat`, conforming to the specifications identified in `dcterms:conformsTo`. Equivalent to `dcat:accessURL`. A landing page URL belongs in the dataset's `schema:url`, not here.
-
 ### schema:name
 
 * **Cardinality:** Optional
@@ -733,23 +701,11 @@ These classes appear in the DataStructure UML model because the profile referenc
 * **Content:** string (MIME type)
 * **Description:** Identifier for format from a registry.
 
-### spdx:checksum
-
-* **Cardinality:** Optional
-* **Content:** spdx:Checksum
-* **Description:** Footprint of the described file enabling modification detection. The algorithm is specified by `spdx:algorithm`.
-
 ### dcterms:conformsTo
 
 * **Cardinality:** Optional, repeatable
 * **Content:** object reference
 * **Description:** Identifier(s) for specification(s) the distribution conforms to. Recommended to enable machine-actionable data access.
-
-### schema:provider
-
-* **Cardinality:** Optional, repeatable
-* **Content:** object reference, Person, or Organization
-* **Description:** Agent responsible for access to the described resource.
 
 ### cdi:isStructuredBy
 
@@ -814,15 +770,15 @@ These classes appear in the DataStructure UML model because the profile referenc
 
 * **Cardinality:** Optional
 * **Content:** array of string (may be language-tagged)
-* **Description:** Human-readable display label for the unit type.
+* **Description:** A human-readable display label for the object for use in user interfaces.
 
 ### cdif:definition
 
 * **Cardinality:** Optional
 * **Content:** string
-* **Description:** Natural-language definition. Mutually exclusive with `cdi:externalDefinition`.
+* **Description:** Natural-language definition. Mutually exclusive with `cdif:externalDefinition`.
 
-### cdi:externalDefinition
+### cdif:externalDefinition
 
 * **Cardinality:** Optional
 * **Content:** object — reference to an external (e.g., SKOS) definition.
@@ -923,7 +879,7 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 
 * **Cardinality:** Optional
 * **Content:** string
-* **Description:** Human-readable display label for the value domain.
+* **Description:** A human-readable display label for the object for use in user interfaces.
 
 ### cdif:recommendedDataType
 

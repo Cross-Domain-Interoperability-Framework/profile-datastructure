@@ -56,7 +56,7 @@ See also [graphical presentation of the Data Structure profile model](https://cr
 
 ## 1. Purpose and scope
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 A CDIF Data Description record (the parent profile) describes *what variables* a dataset measures and *how they map to physical positions in the file*. The Data Structure profile adds another layer: *what roles those variables play in the structure of the dataset and how records are keyed*. A schema:DataDownload distribution gains a `cdi:isStructuredBy` link that points to one of four concrete structure types — `cdi:DataStructure`, `cdi:WideDataStructure`, `cdi:LongDataStructure`, or `cdi:DimensionalDataStructure` — each of which lists data-structure components (identifier, measure, attribute, dimension, variable-descriptor, variable-value). Components are typed by their role and bind to a `cdif:RepresentedVariable` (a logical variable, independent of physical layout). Primary and foreign keys reference ordered sets of represented variables.
 
@@ -64,7 +64,7 @@ A CDIF Data Description record (the parent profile) describes *what variables* a
 
 ## 2. Conformance
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 
 
@@ -104,7 +104,7 @@ Other properties in this profile are optional; conformance requires only that th
 
 # Properties added to schema:DataDownload in schema:Dataset
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 Data Structure profile adds one property to each `schema:DataDownload` distribution item that is included in a Dataset description record. Standalone data structure description instances carry no `schema:distribution` at all: the structure is the subject of the record, not something attached to downloadable data, and a distribution there would describe a different resource than the one the record is about.
 
@@ -118,7 +118,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 ## cdi:DataStructure and subtypes.
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 * Abstract base for `cdi:DimensionalDataStructure`, `cdi:LongDataStructure`, and `cdi:WideDataStructure`. Instances should always be typed as one of those subtypes. It carries the common properties listed below; the subtypes constrain which `DataStructureComponent` kinds may appear in `cdi:has_DataStructureComponent`.
 
@@ -155,7 +155,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 ## cdi:DimensionalDataStructure
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 * Structure of a multidimensional ("cube") dataset, described by dimension, measure and attribute components. Subtype of `cdi:DataStructure`.
 
@@ -182,7 +182,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 ## cdi:LongDataStructure
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 * Structure of a long ("entity-attribute-value") dataset, described by identifier, measure, attribute, variable-descriptor and variable-value components. Subtype of `cdi:DataStructure`.
 
@@ -203,7 +203,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 ## cdi:WideDataStructure
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 * Structure of a wide (one-row-per-unit) dataset, described by identifier, measure and attribute components. Each record represents properties of one unit in the population. Subtype of `cdi:DataStructure`.
 
@@ -224,13 +224,13 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 ## cdif:DataStructureComponent (abstract)
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 * Abstract base for the role-typed components that make up a `cdi:DataStructure`. Instances are always typed as one of the concrete subtypes below. Every component binds a `cdif:RepresentedVariable` to a role inside the structure.
 
 ## cdif:AttributeComponent
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 * Role given to a represented variable in the context of a data structure to qualify observations or provide other supplementary information. Permitted in all three concrete DataStructure subtypes.
 
@@ -270,7 +270,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 ## cdif:DimensionComponent
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 * Role given to a represented variable that acts as a coordinate axis in a multidimensional structure. Used only in `cdi:DimensionalDataStructure`. Dimensions are typically categorical (codelist-valued) or quantized continuous variables (e.g., time bins).  The value domain for the represented variable associated with this component defines the dimension space.
 
@@ -292,7 +292,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 ## cdif:IdentifierComponent
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 * Role given to a represented variable that identifies the unit (individual) that is the subject of properties specified in the record. Used in `cdi:WideDataStructure` and `cdi:LongDataStructure`.
 
@@ -314,7 +314,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 ## cdif:MeasureComponent
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 * Role given to a represented variable that holds the observed or derived values of the dataset. Permitted in `cdi:DimensionalDataStructure` and `cdi:WideDataStructure`. (In `cdi:LongDataStructure` the measured value is carried by `cdif:VariableValueComponent` instead.)
 
@@ -354,7 +354,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 ## cdif:VariableDescriptorComponent
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 * Role given to a represented variable that holds codes identifying *which* logical variable a given row in a long-format dataset is recording. Used only in `cdi:LongDataStructure`.
 
@@ -394,7 +394,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 ## cdif:VariableValueComponent
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 * Role given to a represented variable that carries the value of whichever logical variable the row's `VariableDescriptorComponent` identifies. Used only in `cdi:LongDataStructure`.
 
@@ -422,7 +422,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 ## cdi:DimensionGroup
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 * A set of dimension components that together address a coordinate position within a `cdi:DimensionalDataStructure`. Used by structures where multiple dimensions share a notional axis (e.g., a `time` group containing year/month/day).
 
@@ -444,7 +444,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 ## cdif:Key
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 * An ordered set of variables whose values uniquely identify a record in the dataset. This is the same `cdif:Key` that `cdif:hasPrimaryKey` takes at dataset level — there is no separate `cdif:PrimaryKey` class, so a structure-level key and a dataset-level key can be one node referenced from both places.
 * Position is **explicit**, in `cdi:value` on a `cdi:ComponentPosition` wrapper. It is not implied by array order.
@@ -467,7 +467,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 ## cdif:ForeignKey
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 * A set of represented variables whose values match a primary key in another dataset, expressing a cross-dataset reference.
 
@@ -495,7 +495,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 ## cdif:RepresentedVariable
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 * A conceptual variable bound to a substantive value domain — *logical* in the sense that it is not tied to a particular physical data type or column position. Components in a DataStructure reference RepresentedVariables to indicate which logical variable plays which role. RepresentedVariables are the same thing across wide / long / dimensional structures, which is what lets the same dataset be presented in more than one layout.
 
@@ -596,7 +596,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 ## schema:Identifier
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 * A reusable identifier wrapper following the schema.org `schema:PropertyValue` pattern. **Union-type policy:** in CDIF profile UML models an attribute typed `schema:Identifier` / `schema:PropertyValue` is represented as a single attribute of that class. The JSON Schema permits the value to be EITHER a plain string (interpreted as the bare identifier value) OR a full `schema:PropertyValue` object (with explicit `@type`, `schema:propertyID`, `schema:value`). Consumers should accept both forms.
 
@@ -625,13 +625,13 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 # Classes referenced from other CDIF profiles
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 These classes appear in the DataStructure UML model because the profile references them, but their authoritative definitions live in other profiles. The property tables below are copied here so this guide stands alone; the upstream definition is cited in each section header.
 
 ## dcat:CatalogRecord
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 *Authoritative definition:* [*CDIF Core profile*](https://github.com/Cross-Domain-Interoperability-Framework/profile-core/blob/main/CDIFCoreImplementationGuide.md#dcatcatalogrecord)*.*
 
@@ -691,7 +691,7 @@ These classes appear in the DataStructure UML model because the profile referenc
 
 ## schema:DataDownload
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 *Authoritative definition:* [*CDIF Core profile*](https://github.com/Cross-Domain-Interoperability-Framework/profile-core/blob/main/CDIFCoreImplementationGuide.md#data-download)*.*
 
@@ -756,7 +756,7 @@ These classes appear in the DataStructure UML model because the profile referenc
 
 ## schema:DefinedTerm
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 *Authoritative definition:* [*CDIF Core profile*](https://github.com/Cross-Domain-Interoperability-Framework/profile-core/blob/main/CDIFCoreImplementationGuide.md#defined-term)*.*
 
@@ -793,7 +793,7 @@ These classes appear in the DataStructure UML model because the profile referenc
 
 ## cdif:UnitType
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 *Defined inline as part of the CDIF Data Structure Component vocabulary; a `schema:DefinedTerm`-style structured term used for unit-of-measure values that need machine semantics beyond a free-text label.*
 
@@ -834,7 +834,7 @@ These classes appear in the DataStructure UML model because the profile referenc
 
 ## cdifConceptOrTerm
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 *Authoritative definition:* [*CDIF Data Description profile*](https://github.com/Cross-Domain-Interoperability-Framework/profile-datadescription/blob/main/CDIFDataDescriptionImplementationGuide.md#cdifconceptorterm)*.*
 
@@ -844,7 +844,7 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 
 ## cdif:DescriptorVariable
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 *Authoritative definition: `_sources/cdifDataType/cdifDescriptorVariable/` in* [*metadataBuildingBlocks*](https://github.com/Cross-Domain-Interoperability-Framework/metadataBuildingBlocks)*.*
 
@@ -874,7 +874,7 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 
 ## cdif:DescriptorValueDomain
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 *Authoritative definition: `_sources/cdifDataType/cdifDescriptorVariable/` (`$defs/DescriptorValueDomain`).*
 
@@ -901,7 +901,7 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 
 ## cdi:SubstantiveValueDomain
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 *Authoritative definition:* [*CDIF Data Description profile*](https://github.com/Cross-Domain-Interoperability-Framework/profile-datadescription/blob/main/CDIFDataDescriptionImplementationGuide.md#cdisentinelvaluedomain-cdisubstantivevaluedomain)*.*
 
@@ -938,7 +938,7 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 
 ## cdi:SentinelValueDomain
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 *Authoritative definition:* [*CDIF Data Description profile*](https://github.com/Cross-Domain-Interoperability-Framework/profile-datadescription/blob/main/CDIFDataDescriptionImplementationGuide.md#cdisentinelvaluedomain-cdisubstantivevaluedomain)*.*
 
@@ -946,7 +946,7 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 
 ## cdif:EnumerationDomain
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 *Authoritative definition:* [*CDIF Data Description profile*](https://github.com/Cross-Domain-Interoperability-Framework/profile-datadescription/blob/main/CDIFDataDescriptionImplementationGuide.md#cdifenumerationdomain)*.*
 
@@ -978,7 +978,7 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 
 ## CdifCodelistConcept
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 *Authoritative definition:* [*CDIF Codelist profile*](https://github.com/Cross-Domain-Interoperability-Framework/profile-codelist/blob/main/CDIFCodelistImplementationGuide.md)*.*
 
@@ -1028,7 +1028,7 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 
 ## cdif:ValueAndConceptDescription
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 *Authoritative definition:* [*CDIF Data Description profile*](https://github.com/Cross-Domain-Interoperability-Framework/profile-datadescription/blob/main/CDIFDataDescriptionImplementationGuide.md#cdifvalueandconceptdescription)*.*
 
@@ -1090,7 +1090,7 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 
 # Validation
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 Two validators ship with this repository:
 
@@ -1107,7 +1107,7 @@ Validation is **open-world**: properties not described by the profile are allowe
 
 # Provenance of the artifacts
 
-[↑ Back to TOC](#table-of-contents)
+[^ Back to TOC](#table-of-contents)
 
 The schema and SHACL files are generated from the canonical source register, [metadataBuildingBlocks](https://github.com/Cross-Domain-Interoperability-Framework/metadataBuildingBlocks):
 

@@ -477,7 +477,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 
 * **Cardinality:** Required
 * **Content:** `@id` reference to a `cdif:Key` in a different dataset.
-* **Description:** object reference to the target of the foreign key. Required: a foreign key that references nothing is not a foreign key.
+* **Description:** object reference to the target of the foreign key. Required: a foreign key that references nothing is not a foreign key
 
 ## cdif:RepresentedVariable
 
@@ -638,13 +638,13 @@ These classes appear in the DataStructure UML model because the profile referenc
 
 * **Cardinality:** Required — `"dcat:CatalogRecord"`, repeatable
 * **Content:** string
-* **Description:** The subjectOf/Dataset with information about the metadata record must have an additional type `dcat:CatalogRecord` declared, to distinguish it from other possible schema:subjectOf or schema:Dataset instances.
+* **Description:** schema.org property used to assign other type names or identifiers to extend the rdf @type for semantic purposes, without adding property requirements on the object from those types
 
 ### schema:about
 
 * **Cardinality:** Required
 * **Content:** object reference
-* **Description:** Reference to the metadata record's subject (the dataset) using the `@id` of that record.
+* **Description:** an object reference to the JSON object/graph node that a subjectOf.Dataset[additionalProperty = dcat:CatalogRecord] describes
 
 ### dcterms:conformsTo
 
@@ -781,6 +781,7 @@ These classes appear in the DataStructure UML model because the profile referenc
 ### cdif:externalDefinition
 
 * **Cardinality:** Optional
+* **Description:** a reference to an external resource that defines a variable
 * **Content:** object — reference to an external (e.g., SKOS) definition.
 
 ### cdif:descriptiveText

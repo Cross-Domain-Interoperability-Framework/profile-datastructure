@@ -22,7 +22,7 @@
         "cdif:name": [
           "observation_id"
         ],
-        "cdi:hasIntendedDataType": "xsd:string"
+        "cdif:hasIntendedDataType": "xsd:string"
       }
     },
     {
@@ -38,7 +38,7 @@
         "cdif:name": [
           "observation_value"
         ],
-        "cdi:hasIntendedDataType": "xsd:decimal"
+        "cdif:hasIntendedDataType": "xsd:decimal"
       }
     }
   ]

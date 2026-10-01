@@ -25,7 +25,7 @@
         "cdif:name": [
           "country"
         ],
-        "cdi:hasIntendedDataType": "xsd:string"
+        "cdif:hasIntendedDataType": "xsd:string"
       }
     },
     {
@@ -41,7 +41,7 @@
         "cdif:name": [
           "quarter"
         ],
-        "cdi:hasIntendedDataType": "xsd:gYearMonth"
+        "cdif:hasIntendedDataType": "xsd:gYearMonth"
       }
     },
     {
@@ -57,7 +57,7 @@
         "cdif:name": [
           "product_category"
         ],
-        "cdi:hasIntendedDataType": "xsd:string"
+        "cdif:hasIntendedDataType": "xsd:string"
       }
     },
     {
@@ -74,9 +74,9 @@
           "sales_amount"
         ],
         "cdi:simpleUnitOfMeasure": "USD",
-        "cdi:hasIntendedDataType": "xsd:decimal"
+        "cdif:hasIntendedDataType": "xsd:decimal"
       },
-      "cdi:semantic": [
+      "cdif:semantic": [
         {
           "@type": [
             "skos:Concept"
@@ -95,7 +95,7 @@
         "cdi:AttributeComponent"
       ],
       "@id": "ex:struct/salesCube/comp/currency",
-      "cdi:qualifies": [
+      "cdif:qualifies": [
         {
           "@id": "ex:struct/salesCube/comp/salesAmount"
         }
@@ -108,7 +108,7 @@
         "cdif:name": [
           "currency"
         ],
-        "cdi:hasIntendedDataType": "xsd:string"
+        "cdif:hasIntendedDataType": "xsd:string"
       }
     }
   ],

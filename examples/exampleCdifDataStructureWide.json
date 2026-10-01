@@ -24,7 +24,7 @@
         "cdif:name": [
           "patient_id"
         ],
-        "cdi:hasIntendedDataType": "xsd:string"
+        "cdif:hasIntendedDataType": "xsd:string"
       }
     },
     {
@@ -41,7 +41,7 @@
           "systolic_bp"
         ],
         "cdi:simpleUnitOfMeasure": "mmHg",
-        "cdi:hasIntendedDataType": "xsd:integer"
+        "cdif:hasIntendedDataType": "xsd:integer"
       }
     },
     {
@@ -58,7 +58,7 @@
           "diastolic_bp"
         ],
         "cdi:simpleUnitOfMeasure": "mmHg",
-        "cdi:hasIntendedDataType": "xsd:integer"
+        "cdif:hasIntendedDataType": "xsd:integer"
       }
     },
     {
@@ -75,7 +75,7 @@
           "heart_rate"
         ],
         "cdi:simpleUnitOfMeasure": "bpm",
-        "cdi:hasIntendedDataType": "xsd:integer"
+        "cdif:hasIntendedDataType": "xsd:integer"
       }
     },
     {
@@ -91,7 +91,7 @@
         "cdif:name": [
           "observed_at"
         ],
-        "cdi:hasIntendedDataType": "xsd:dateTime"
+        "cdif:hasIntendedDataType": "xsd:dateTime"
       }
     }
   ],

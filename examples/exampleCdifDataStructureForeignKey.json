@@ -1,0 +1,68 @@
+{
+  "@context": {
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "cdif": "https://w3id.org/cdif/",
+    "ex": "https://example.org/"
+  },
+  "@type": [
+    "cdi:WideDataStructure"
+  ],
+  "@id": "ex:struct/measurements",
+  "cdi:has_DataStructureComponent": [
+    {
+      "@type": [
+        "cdi:IdentifierComponent"
+      ],
+      "@id": "ex:struct/measurements/comp/siteId",
+      "cdif:isDefinedBy_Variable": {
+        "@type": [
+          "cdi:RepresentedVariable"
+        ],
+        "@id": "ex:struct/measurements/rv/siteId",
+        "cdif:name": [
+          "site_id"
+        ],
+        "cdif:hasIntendedDataType": "xsd:string"
+      }
+    },
+    {
+      "@type": [
+        "cdi:MeasureComponent"
+      ],
+      "@id": "ex:struct/measurements/comp/temperature",
+      "cdif:isDefinedBy_Variable": {
+        "@type": [
+          "cdi:RepresentedVariable"
+        ],
+        "@id": "ex:struct/measurements/rv/temperature",
+        "cdif:name": [
+          "temperature_c"
+        ],
+        "cdif:hasIntendedDataType": "xsd:decimal"
+      }
+    }
+  ],
+  "cdif:has_ForeignKey": [
+    {
+      "@type": [
+        "cdif:ForeignKey"
+      ],
+      "@id": "ex:struct/measurements/fk/site",
+      "cdif:isComposedOf": [
+        {
+          "@type": [
+            "cdi:ComponentPosition"
+          ],
+          "@id": "ex:struct/measurements/fk/site/pos/1",
+          "cdi:indexes": {
+            "@id": "ex:struct/measurements/rv/siteId"
+          },
+          "cdi:value": 1
+        }
+      ],
+      "cdif:references": {
+        "@id": "ex:struct/sites/pk/siteId"
+      }
+    }
+  ]
+}

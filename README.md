@@ -14,7 +14,7 @@ This repository holds the published artifacts for the **CDIF Data Structure prof
 
 ## Examples
 
-`examples/` holds JSON-LD examples illustrating the dimensional, long, wide, and minimal-complete data-structure shapes. Validate one with:
+`examples/` holds JSON-LD examples illustrating the dimensional, long, wide, minimal-complete, and foreign-key data-structure shapes. Validate one with:
 
 ```bash
 python FrameAndValidate.py examples/exampleCdifDataStructureComplete.json --validate

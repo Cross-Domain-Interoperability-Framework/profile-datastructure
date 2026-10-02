@@ -242,19 +242,19 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Content:** `cdif:RepresentedVariable` inline or `@id` reference. Logical variable that contains values for this component.
 * **Description:** a link (object reference) to the variable that contains values for a data structure component
 
-### cdi:qualifies
+### cdif:qualifies
 
 * **Cardinality:** Optional
 * **Content:** array of inline `cdif:DataStructureComponent` or `@id` references.
 * **Description:** Reference to another variable in this dataset that this variable qualifies (provides additional context for; e.g. a measurement-channel attribute qualifying a measure variable).
 
-### cdi:identifier
+### cdif:identifier
 
 * **Cardinality:** Optional
 * **Content:** `@id` reference to a `schema:Identifier`. Identify this component definition in a global context for use in other documents.
 * **Description:** an external identifier for the defined data structure component
 
-### cdi:semantic
+### cdif:semantic
 
 * **Cardinality:** Optional
 * **Content:** array; each item is either a string IRI or a `cdifConceptOrTerm` (object or `@id` reference).
@@ -332,13 +332,13 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Content:** array of string
 * **Description:** Human-understandable name for the component. ISO/IEC 11179-5 naming principles may be followed.
 
-### cdi:identifier
+### cdif:identifier
 
 * **Cardinality:** Optional
 * **Content:** `@id` reference to a `schema:Identifier`. Identify this component definition in a global context for use in other documents.
 * **Description:** an external identifier for the defined data structure component
 
-### cdi:semantic
+### cdif:semantic
 
 * **Cardinality:** Optional
 * **Content:** array; each item is either a string IRI or a `cdifConceptOrTerm`.
@@ -372,13 +372,13 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Content:** `@id` reference to another `cdif:DataStructureComponent`.
 * **Description:** reference to data structure component that is the object of a attributeComponent.
 
-### cdi:identifier
+### cdif:identifier
 
 * **Cardinality:** Optional
 * **Content:** `@id` reference to a `schema:Identifier`. 
 * **Description:** Identify this component definition in a global context for use in other documents.
 
-### cdi:semantic
+### cdif:semantic
 
 * **Cardinality:** Optional
 * **Content:** array; each item is either a string IRI or a `cdifConceptOrTerm`.
@@ -406,7 +406,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Content:** `cdif:RepresentedVariable` inline or `@id` reference. 
 * **Description:** a link (object reference) to the variable that contains values for a data structure component
 
-### cdi:semantic
+### cdif:semantic
 
 * **Cardinality:** Optional
 * **Content:** array; each item is either a string IRI or a `cdifConceptOrTerm`.
@@ -473,7 +473,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Content:** array of `cdi:ComponentPosition` objects, same shape as on `cdif:Key`: `@type`, `cdi:indexes` (`@id` reference only) and `cdi:value` are all required. Until 2026-09-25 only `@type` was required here, so a wrapper naming no variable and no position validated.
 * **Description:** Ordered list of `cdi:ComponentPosition` wrappers, one per key component. Each wrapper holds a `cdi:value` (the 1-based integer position, default `1`) for its position, and `cdi:indexes` (an `@id`-reference to the variable used at that position in the key -- an inline variable definition is **not** permitted)
 
-### cdif:references
+### cdif:references_PrimaryKey
 
 * **Cardinality:** Required
 * **Content:** `@id` reference to a `cdif:Key` in a different dataset.
@@ -525,20 +525,20 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Content:** string
 * **Description:** free text explanation of the variable's intention.
 
-### cdi:identifier
+### cdif:identifier
 
 * **Cardinality:** Optional
 * **Content:** `@id` reference to a `schema:Identifier`. 
 * **Description:** Identify this variable definition in a global context for use in other documents.
 
 
-### cdi:hasIntendedDataType
+### cdif:hasIntendedDataType
 
 * **Cardinality:** Optional
 * **Content:** one of: string IRI, or `cdifConceptOrTerm` `@id` reference.
 * **Description:** The physical datatype intended to be used for values of this variable. Supports the optional use of an external controlled vocabulary.Recommended values are XML Schema datatypes; see [xsdDataType](#xsddatatype)
 
-### cdi:describedUnitOfMeasure
+### cdif:describedUnitOfMeasure
 
 * **Cardinality:** Optional
 * **Content:** one of: string, `cdifConceptOrTerm` `@id` reference.
@@ -550,7 +550,7 @@ Data Structure profile adds one property to each `schema:DataDownload` distribut
 * **Content:** string
 * **Description:** The unit in which the data values are measured (kg, pound, euro), expressed as a simple string, in cases where no additional information is available (in the legacy system) or needed (as in the case of broad agreement within the community of use [i.e., ISO country codes, currencies, etc. in SDMX])
 
-### cdi:unitOfMeasureKind
+### cdif:unitOfMeasureKind
 
 * **Cardinality:** Optional
 * **Content:** one of: string, `cdifConceptOrTerm` `@id` reference.
@@ -924,7 +924,7 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 
 ### cdif:references
 
-* **Cardinality:** Required
+* **Cardinality:** Conditional — required unless `schema:description` is present. A domain must state its values either by naming the codelist that defines them or in prose.
 * **Content:** CDIF Codelist (`skos:ConceptScheme`) or `@id` reference to one.
 * **Description:** The codelist whose notation values define the allowed values of this enumeration domain.
 
@@ -1004,13 +1004,13 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 * **Content:** string
 * **Description:** Human-readable description of the value restrictions for this domain.
 
-### cdi:formatPattern
+### cdif:formatPattern
 
 * **Cardinality:** Optional
 * **Content:** string
 * **Description:** A pattern for numbers or dates as described in Unicode Locale Data Markup Language (LDML) Part 3 (Numbers) and Part 4 (Dates). Examples: `#,##0.###` for a decimal number; `yyyy.MM.ddTHH:mm:ss zzz` for a datetime.
 
-### cdi:logicalExpression
+### cdif:logicalExpression
 
 * **Cardinality:** Optional
 * **Content:** string
@@ -1040,7 +1040,7 @@ Used in this profile in `cdi:semantic`, `cdi:hasIntendedDataType`, `cdi:describe
 * **Content:** string
 * **Description:** Minimum valid value (inclusive).
 
-### cdi:regularExpression
+### cdif:regularExpression
 
 * **Cardinality:** Optional
 * **Content:** string

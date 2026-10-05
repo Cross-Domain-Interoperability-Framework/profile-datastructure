@@ -234,19 +234,19 @@
         "cdif:has_Statistics": {
             "@embed": "@always",
             "cdi:statistic": {"@embed": "@always"},
-            "cdi:typeOfStatistic": {"@embed": "@always"},
+            "cdif:typeOfStatistic": {"@embed": "@always"},
             "cdi:hasWeight": {"@embed": "@always"},
             "cdif:appliesTo": {"@embed": "@always"},
             "cdif:has_CategoryStatistics": {
                 "@embed": "@always",
                 "cdi:for": {"@embed": "@always"},
                 "cdi:statistic": {"@embed": "@always"},
-                "cdi:typeOfStatistic": {"@embed": "@always"},
+                "cdif:typeOfStatistic": {"@embed": "@always"},
                 "cdi:hasWeight": {"@embed": "@always"}
             }
         },
         "cdi:statistic": {"@embed": "@always"},
-        "cdi:typeOfStatistic": {"@embed": "@always"},
+        "cdif:typeOfStatistic": {"@embed": "@always"},
         "cdi:hasWeight": {"@embed": "@always"},
         "cdif:appliesTo": {"@embed": "@always"},
         "cdif:has_CategoryStatistics": {"@embed": "@always"},
@@ -270,11 +270,11 @@
         "cdif:simpleUnitOfMeasure": {"@embed": "@always"},
         "cdif:uses": {"@embed": "@always"},
         "cdif:isDescribedBy_StatisticsCollection": {"@embed": "@always"},
-        "cdi:function": {"@embed": "@always"},
-        "cdi:platformType": {"@embed": "@always"},
+        "cdif:function": {"@embed": "@always"},
+        "cdif:platformType": {"@embed": "@always"},
         "cdi:source": {"@embed": "@always"},
-        "cdi:hasIntendedDataType": {"@embed": "@always"},
-        "cdi:describedUnitOfMeasure": {"@embed": "@always"}
+        "cdif:hasIntendedDataType": {"@embed": "@always"},
+        "cdif:describedUnitOfMeasure": {"@embed": "@always"}
     },
 
     "schema:spatialCoverage": {

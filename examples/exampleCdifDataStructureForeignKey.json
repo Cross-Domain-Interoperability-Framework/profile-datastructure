@@ -60,7 +60,7 @@
           "cdi:value": 1
         }
       ],
-      "cdif:references": {
+      "cdif:references_PrimaryKey": {
         "@id": "ex:struct/sites/pk/siteId"
       }
     }

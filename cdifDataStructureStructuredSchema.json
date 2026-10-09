@@ -27,302 +27,16 @@
       {
         "anyOf": [
           {
-            "type": "object",
-            "description": "Data organization based on reusable data structure components.",
-            "properties": {
-              "@type": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "contains": {
-                  "const": "cdi:DataStructure"
-                },
-                "minItems": 1
-              },
-              "@id": {
-                "type": "string",
-                "description": "Identifier for this DataStructure node"
-              },
-              "cdif:has_ForeignKey": {
-                "description": "Variables whose values identify records in a different dataset.",
-                "type": "array",
-                "items": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/$defs/ForeignKey"
-                    },
-                    {
-                      "$ref": "#/$defs/ObjectReference"
-                    }
-                  ]
-                },
-                "minItems": 1
-              },
-              "cdi:has_DataStructureComponent": {
-                "type": "array",
-                "items": {
-                  "anyOf": [
-                    {
-                      "title": "DDI-CDI Data Structure Component",
-                      "description": "Role given to a represented variable in the context of a long or wide data structure to identify the units associated to data points, and in dimensional and key value data structures to provide identifying fields for the instance values.",
-                      "anyOf": [
-                        {
-                          "$ref": "#/$defs/IdentifierComponent"
-                        },
-                        {
-                          "$ref": "#/$defs/MeasureComponent"
-                        },
-                        {
-                          "$ref": "#/$defs/AttributeComponent"
-                        },
-                        {
-                          "$ref": "#/$defs/DimensionComponent"
-                        },
-                        {
-                          "$ref": "#/$defs/VariableValueComponent"
-                        },
-                        {
-                          "$ref": "#/$defs/VariableDescriptorComponent"
-                        }
-                      ]
-                    },
-                    {
-                      "$ref": "#/$defs/ObjectReference"
-                    }
-                  ]
-                },
-                "minItems": 1
-              },
-              "cdif:has_PrimaryKey": {
-                "$ref": "#/$defs/PrimaryKey",
-                "description": "Variables in the structure that uniquely identify a record."
-              }
-            },
-            "required": [
-              "@type"
-            ],
-            "anyOf": [
-              {
-                "required": [
-                  "cdi:has_DataStructureComponent"
-                ]
-              },
-              {
-                "required": [
-                  "cdif:has_ForeignKey"
-                ]
-              },
-              {
-                "required": [
-                  "cdif:has_PrimaryKey"
-                ]
-              }
-            ]
+            "$ref": "#/$defs/DataStructure"
           },
           {
-            "type": "object",
-            "description": "Structure of a dimensional data set (organized collection of multidimensional data). It is described by dimension, measure and attribute components.",
-            "properties": {
-              "@type": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "contains": {
-                  "const": "cdi:DimensionalDataStructure"
-                },
-                "minItems": 1
-              },
-              "@id": {
-                "type": "string",
-                "description": "Identifier for this DimensionalDataStructure node"
-              },
-              "cdi:has_DataStructureComponent": {
-                "type": "array",
-                "items": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/$defs/IdentifierComponent"
-                    },
-                    {
-                      "$ref": "#/$defs/MeasureComponent"
-                    },
-                    {
-                      "$ref": "#/$defs/AttributeComponent"
-                    },
-                    {
-                      "$ref": "#/$defs/DimensionComponent"
-                    },
-                    {
-                      "$ref": "#/$defs/ObjectReference"
-                    }
-                  ]
-                },
-                "minItems": 1
-              },
-              "cdif:has_PrimaryKey": {
-                "$ref": "#/$defs/PrimaryKey",
-                "description": "Variables in the structure that uniquely identify a record."
-              },
-              "cdif:has_ForeignKey": {
-                "description": "Variables whose values identify records in a different dataset.",
-                "type": "array",
-                "items": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/$defs/ForeignKey"
-                    },
-                    {
-                      "$ref": "#/$defs/ObjectReference"
-                    }
-                  ]
-                },
-                "minItems": 1
-              }
-            },
-            "required": [
-              "@type",
-              "cdi:has_DataStructureComponent"
-            ]
+            "$ref": "#/$defs/DimensionalDataStructure"
           },
           {
-            "type": "object",
-            "description": "Structure of a long dataset (organized collection of long data). It is described by identifier, measure, attribute, variable descriptor and variable value components.",
-            "properties": {
-              "@type": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "contains": {
-                  "const": "cdi:LongDataStructure"
-                },
-                "minItems": 1
-              },
-              "@id": {
-                "type": "string",
-                "description": "Identifier for this LongDataStructure node"
-              },
-              "cdi:has_DataStructureComponent": {
-                "type": "array",
-                "description": "A LongDataStructure must include exactly one IdentifierComponent, exactly one VariableDescriptorComponent, exactly one VariableValueComponent, plus zero or more AttributeComponents.",
-                "items": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/$defs/IdentifierComponent"
-                    },
-                    {
-                      "$ref": "#/$defs/VariableDescriptorComponent"
-                    },
-                    {
-                      "$ref": "#/$defs/VariableValueComponent"
-                    },
-                    {
-                      "$ref": "#/$defs/AttributeComponent"
-                    },
-                    {
-                      "$ref": "#/$defs/ObjectReference"
-                    }
-                  ]
-                },
-                "allOf": [
-                  {
-                    "contains": {
-                      "$ref": "#/$defs/IdentifierComponent"
-                    },
-                    "minContains": 1,
-                    "maxContains": 1
-                  },
-                  {
-                    "contains": {
-                      "$ref": "#/$defs/VariableDescriptorComponent"
-                    },
-                    "minContains": 1,
-                    "maxContains": 1
-                  },
-                  {
-                    "contains": {
-                      "$ref": "#/$defs/VariableValueComponent"
-                    },
-                    "minContains": 1,
-                    "maxContains": 1
-                  }
-                ],
-                "minItems": 3
-              },
-              "cdif:has_PrimaryKey": {
-                "$ref": "#/$defs/PrimaryKey",
-                "description": "Variables in the structure that uniquely identify a record."
-              }
-            },
-            "required": [
-              "@type",
-              "cdi:has_DataStructureComponent"
-            ]
+            "$ref": "#/$defs/LongDataStructure"
           },
           {
-            "type": "object",
-            "description": "Structure of a wide dataset (organized collection of wide data). It is described by identifier, measure and attribute components.",
-            "properties": {
-              "@type": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "contains": {
-                  "const": "cdi:WideDataStructure"
-                },
-                "minItems": 1
-              },
-              "@id": {
-                "type": "string",
-                "description": "Identifier for this WideDataStructure node"
-              },
-              "cdi:has_DataStructureComponent": {
-                "type": "array",
-                "items": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/$defs/IdentifierComponent"
-                    },
-                    {
-                      "$ref": "#/$defs/MeasureComponent"
-                    },
-                    {
-                      "$ref": "#/$defs/AttributeComponent"
-                    },
-                    {
-                      "$ref": "#/$defs/ObjectReference"
-                    }
-                  ]
-                },
-                "minItems": 1
-              },
-              "cdif:has_PrimaryKey": {
-                "$ref": "#/$defs/PrimaryKey",
-                "description": "Variables in the structure that uniquely identify a record."
-              },
-              "cdif:has_ForeignKey": {
-                "description": "Variables whose values identify records in a different dataset.",
-                "type": "array",
-                "items": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/$defs/ForeignKey"
-                    },
-                    {
-                      "$ref": "#/$defs/ObjectReference"
-                    }
-                  ]
-                },
-                "minItems": 1
-              }
-            },
-            "required": [
-              "@type",
-              "cdi:has_DataStructureComponent"
-            ]
+            "$ref": "#/$defs/WideDataStructure"
           }
         ]
       },
@@ -1120,11 +834,27 @@
                           "cdif:purpose": {
                             "type": "string",
                             "description": "Intent or reason for the object/the description of the object."
+                          },
+                          "schema:description": {
+                            "type": "string",
+                            "description": "Prose statement of the values this domain admits. Required when cdif:references is absent, so that a domain naming no codelist still says what it enumerates."
                           }
                         },
                         "required": [
                           "@type"
-                        ]
+                        ],
+                        "if": {
+                          "not": {
+                            "required": [
+                              "cdif:references"
+                            ]
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "schema:description"
+                          ]
+                        }
                       },
                       {
                         "type": "object",
@@ -1614,11 +1344,27 @@
                         "cdif:purpose": {
                           "type": "string",
                           "description": "Intent or reason for the object/the description of the object."
+                        },
+                        "schema:description": {
+                          "type": "string",
+                          "description": "Prose statement of the values this domain admits. Required when cdif:references is absent, so that a domain naming no codelist still says what it enumerates."
                         }
                       },
                       "required": [
                         "@type"
-                      ]
+                      ],
+                      "if": {
+                        "not": {
+                          "required": [
+                            "cdif:references"
+                          ]
+                        }
+                      },
+                      "then": {
+                        "required": [
+                          "schema:description"
+                        ]
+                      }
                     },
                     {
                       "type": "object",
@@ -1846,11 +1592,18 @@
                   "description": "Identifier for objects requiring short- or long-lasting referencing and management."
                 },
                 "cdif:name": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "minItems": 1,
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "minItems": 1
+                    }
+                  ],
                   "description": "Human understandable name (linguistic signifier, word, phrase, or mnemonic). May follow ISO/IEC 11179-5 naming principles, and have context provided to specify usage."
                 },
                 "cdif:uses_Concept": {
@@ -1909,11 +1662,18 @@
           "description": "Identifier for objects requiring short- or long-lasting referencing and management."
         },
         "cdif:name": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1,
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            }
+          ],
           "description": "Human understandable name (linguistic signifier, word, phrase, or mnemonic). May follow ISO/IEC 11179-5 naming principles, and have context provided to specify usage."
         },
         "cdif:uses_Concept": {
@@ -1948,7 +1708,9 @@
       "properties": {
         "@type": {
           "description": "Either construct, or both. A labeled link is a schema:CreativeWork at a URL; a dcat:Relationship is DCAT's association class for a typed relation to another resource. A node may declare both -- CDIF's own relation examples do -- but NEITHER IS REQUIRED TO ACCOMPANY THE OTHER.\nThat is the whole point of the anyOf. Until 2026-09-08 this block's Relation half required contains: dcat:Relationship while the labeled-link half required contains: schema:CreativeWork, and under allOf both applied to every instance, so an ordinary labeled link was unsatisfiable. Of profile-core's licenses the 29 plain strings and 1 @id-reference passed while the 10 that followed schema.org's own recommendation -- \"use schema:CreativeWork to provide a label (name) for the license\" -- failed. 412782113 fixed that by deleting the dcat:Relationship mandate outright, which left the JSON Schema with no notion of dcat:Relationship at all while rules.shacl went on targeting it as a class. A pure DCAT relation then met a SHACL requirement with no schema counterpart. This anyOf restores the type to the schema WITHOUT restoring the conjunction.",
-          "default": "schema:CreativeWork",
+          "default": [
+            "schema:CreativeWork"
+          ],
           "type": "array",
           "items": {
             "type": "string"
@@ -2358,302 +2120,16 @@
           "description": "Reusable data-structure description for this distribution. One of the four DataStructure variants (DataStructure, Dimensional, Long, Wide) as an inline definition, or an @id reference to one declared elsewhere in the document or published at a resolvable URI. (A profile may further require the inline form via SHACL.)",
           "anyOf": [
             {
-              "type": "object",
-              "description": "Data organization based on reusable data structure components.",
-              "properties": {
-                "@type": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "contains": {
-                    "const": "cdi:DataStructure"
-                  },
-                  "minItems": 1
-                },
-                "@id": {
-                  "type": "string",
-                  "description": "Identifier for this DataStructure node"
-                },
-                "cdif:has_ForeignKey": {
-                  "description": "Variables whose values identify records in a different dataset.",
-                  "type": "array",
-                  "items": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/$defs/ForeignKey"
-                      },
-                      {
-                        "$ref": "#/$defs/ObjectReference"
-                      }
-                    ]
-                  },
-                  "minItems": 1
-                },
-                "cdi:has_DataStructureComponent": {
-                  "type": "array",
-                  "items": {
-                    "anyOf": [
-                      {
-                        "title": "DDI-CDI Data Structure Component",
-                        "description": "Role given to a represented variable in the context of a long or wide data structure to identify the units associated to data points, and in dimensional and key value data structures to provide identifying fields for the instance values.",
-                        "anyOf": [
-                          {
-                            "$ref": "#/$defs/IdentifierComponent"
-                          },
-                          {
-                            "$ref": "#/$defs/MeasureComponent"
-                          },
-                          {
-                            "$ref": "#/$defs/AttributeComponent"
-                          },
-                          {
-                            "$ref": "#/$defs/DimensionComponent"
-                          },
-                          {
-                            "$ref": "#/$defs/VariableValueComponent"
-                          },
-                          {
-                            "$ref": "#/$defs/VariableDescriptorComponent"
-                          }
-                        ]
-                      },
-                      {
-                        "$ref": "#/$defs/ObjectReference"
-                      }
-                    ]
-                  },
-                  "minItems": 1
-                },
-                "cdif:has_PrimaryKey": {
-                  "$ref": "#/$defs/PrimaryKey",
-                  "description": "Variables in the structure that uniquely identify a record."
-                }
-              },
-              "required": [
-                "@type"
-              ],
-              "anyOf": [
-                {
-                  "required": [
-                    "cdi:has_DataStructureComponent"
-                  ]
-                },
-                {
-                  "required": [
-                    "cdif:has_ForeignKey"
-                  ]
-                },
-                {
-                  "required": [
-                    "cdif:has_PrimaryKey"
-                  ]
-                }
-              ]
+              "$ref": "#/$defs/DataStructure"
             },
             {
-              "type": "object",
-              "description": "Structure of a dimensional data set (organized collection of multidimensional data). It is described by dimension, measure and attribute components.",
-              "properties": {
-                "@type": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "contains": {
-                    "const": "cdi:DimensionalDataStructure"
-                  },
-                  "minItems": 1
-                },
-                "@id": {
-                  "type": "string",
-                  "description": "Identifier for this DimensionalDataStructure node"
-                },
-                "cdi:has_DataStructureComponent": {
-                  "type": "array",
-                  "items": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/$defs/IdentifierComponent"
-                      },
-                      {
-                        "$ref": "#/$defs/MeasureComponent"
-                      },
-                      {
-                        "$ref": "#/$defs/AttributeComponent"
-                      },
-                      {
-                        "$ref": "#/$defs/DimensionComponent"
-                      },
-                      {
-                        "$ref": "#/$defs/ObjectReference"
-                      }
-                    ]
-                  },
-                  "minItems": 1
-                },
-                "cdif:has_PrimaryKey": {
-                  "$ref": "#/$defs/PrimaryKey",
-                  "description": "Variables in the structure that uniquely identify a record."
-                },
-                "cdif:has_ForeignKey": {
-                  "description": "Variables whose values identify records in a different dataset.",
-                  "type": "array",
-                  "items": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/$defs/ForeignKey"
-                      },
-                      {
-                        "$ref": "#/$defs/ObjectReference"
-                      }
-                    ]
-                  },
-                  "minItems": 1
-                }
-              },
-              "required": [
-                "@type",
-                "cdi:has_DataStructureComponent"
-              ]
+              "$ref": "#/$defs/DimensionalDataStructure"
             },
             {
-              "type": "object",
-              "description": "Structure of a long dataset (organized collection of long data). It is described by identifier, measure, attribute, variable descriptor and variable value components.",
-              "properties": {
-                "@type": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "contains": {
-                    "const": "cdi:LongDataStructure"
-                  },
-                  "minItems": 1
-                },
-                "@id": {
-                  "type": "string",
-                  "description": "Identifier for this LongDataStructure node"
-                },
-                "cdi:has_DataStructureComponent": {
-                  "type": "array",
-                  "description": "A LongDataStructure must include exactly one IdentifierComponent, exactly one VariableDescriptorComponent, exactly one VariableValueComponent, plus zero or more AttributeComponents.",
-                  "items": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/$defs/IdentifierComponent"
-                      },
-                      {
-                        "$ref": "#/$defs/VariableDescriptorComponent"
-                      },
-                      {
-                        "$ref": "#/$defs/VariableValueComponent"
-                      },
-                      {
-                        "$ref": "#/$defs/AttributeComponent"
-                      },
-                      {
-                        "$ref": "#/$defs/ObjectReference"
-                      }
-                    ]
-                  },
-                  "allOf": [
-                    {
-                      "contains": {
-                        "$ref": "#/$defs/IdentifierComponent"
-                      },
-                      "minContains": 1,
-                      "maxContains": 1
-                    },
-                    {
-                      "contains": {
-                        "$ref": "#/$defs/VariableDescriptorComponent"
-                      },
-                      "minContains": 1,
-                      "maxContains": 1
-                    },
-                    {
-                      "contains": {
-                        "$ref": "#/$defs/VariableValueComponent"
-                      },
-                      "minContains": 1,
-                      "maxContains": 1
-                    }
-                  ],
-                  "minItems": 3
-                },
-                "cdif:has_PrimaryKey": {
-                  "$ref": "#/$defs/PrimaryKey",
-                  "description": "Variables in the structure that uniquely identify a record."
-                }
-              },
-              "required": [
-                "@type",
-                "cdi:has_DataStructureComponent"
-              ]
+              "$ref": "#/$defs/LongDataStructure"
             },
             {
-              "type": "object",
-              "description": "Structure of a wide dataset (organized collection of wide data). It is described by identifier, measure and attribute components.",
-              "properties": {
-                "@type": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "contains": {
-                    "const": "cdi:WideDataStructure"
-                  },
-                  "minItems": 1
-                },
-                "@id": {
-                  "type": "string",
-                  "description": "Identifier for this WideDataStructure node"
-                },
-                "cdi:has_DataStructureComponent": {
-                  "type": "array",
-                  "items": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/$defs/IdentifierComponent"
-                      },
-                      {
-                        "$ref": "#/$defs/MeasureComponent"
-                      },
-                      {
-                        "$ref": "#/$defs/AttributeComponent"
-                      },
-                      {
-                        "$ref": "#/$defs/ObjectReference"
-                      }
-                    ]
-                  },
-                  "minItems": 1
-                },
-                "cdif:has_PrimaryKey": {
-                  "$ref": "#/$defs/PrimaryKey",
-                  "description": "Variables in the structure that uniquely identify a record."
-                },
-                "cdif:has_ForeignKey": {
-                  "description": "Variables whose values identify records in a different dataset.",
-                  "type": "array",
-                  "items": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/$defs/ForeignKey"
-                      },
-                      {
-                        "$ref": "#/$defs/ObjectReference"
-                      }
-                    ]
-                  },
-                  "minItems": 1
-                }
-              },
-              "required": [
-                "@type",
-                "cdi:has_DataStructureComponent"
-              ]
+              "$ref": "#/$defs/WideDataStructure"
             },
             {
               "$ref": "#/$defs/ObjectReference"
@@ -2667,302 +2143,16 @@
             "description": "Reusable data-structure description for this distribution. One of the four DataStructure variants (DataStructure, Dimensional, Long, Wide) as an inline definition, or an @id reference to one declared elsewhere in the document or published at a resolvable URI. (A profile may further require the inline form via SHACL.)",
             "anyOf": [
               {
-                "type": "object",
-                "description": "Data organization based on reusable data structure components.",
-                "properties": {
-                  "@type": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "contains": {
-                      "const": "cdi:DataStructure"
-                    },
-                    "minItems": 1
-                  },
-                  "@id": {
-                    "type": "string",
-                    "description": "Identifier for this DataStructure node"
-                  },
-                  "cdif:has_ForeignKey": {
-                    "description": "Variables whose values identify records in a different dataset.",
-                    "type": "array",
-                    "items": {
-                      "anyOf": [
-                        {
-                          "$ref": "#/$defs/ForeignKey"
-                        },
-                        {
-                          "$ref": "#/$defs/ObjectReference"
-                        }
-                      ]
-                    },
-                    "minItems": 1
-                  },
-                  "cdi:has_DataStructureComponent": {
-                    "type": "array",
-                    "items": {
-                      "anyOf": [
-                        {
-                          "title": "DDI-CDI Data Structure Component",
-                          "description": "Role given to a represented variable in the context of a long or wide data structure to identify the units associated to data points, and in dimensional and key value data structures to provide identifying fields for the instance values.",
-                          "anyOf": [
-                            {
-                              "$ref": "#/$defs/IdentifierComponent"
-                            },
-                            {
-                              "$ref": "#/$defs/MeasureComponent"
-                            },
-                            {
-                              "$ref": "#/$defs/AttributeComponent"
-                            },
-                            {
-                              "$ref": "#/$defs/DimensionComponent"
-                            },
-                            {
-                              "$ref": "#/$defs/VariableValueComponent"
-                            },
-                            {
-                              "$ref": "#/$defs/VariableDescriptorComponent"
-                            }
-                          ]
-                        },
-                        {
-                          "$ref": "#/$defs/ObjectReference"
-                        }
-                      ]
-                    },
-                    "minItems": 1
-                  },
-                  "cdif:has_PrimaryKey": {
-                    "$ref": "#/$defs/PrimaryKey",
-                    "description": "Variables in the structure that uniquely identify a record."
-                  }
-                },
-                "required": [
-                  "@type"
-                ],
-                "anyOf": [
-                  {
-                    "required": [
-                      "cdi:has_DataStructureComponent"
-                    ]
-                  },
-                  {
-                    "required": [
-                      "cdif:has_ForeignKey"
-                    ]
-                  },
-                  {
-                    "required": [
-                      "cdif:has_PrimaryKey"
-                    ]
-                  }
-                ]
+                "$ref": "#/$defs/DataStructure"
               },
               {
-                "type": "object",
-                "description": "Structure of a dimensional data set (organized collection of multidimensional data). It is described by dimension, measure and attribute components.",
-                "properties": {
-                  "@type": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "contains": {
-                      "const": "cdi:DimensionalDataStructure"
-                    },
-                    "minItems": 1
-                  },
-                  "@id": {
-                    "type": "string",
-                    "description": "Identifier for this DimensionalDataStructure node"
-                  },
-                  "cdi:has_DataStructureComponent": {
-                    "type": "array",
-                    "items": {
-                      "anyOf": [
-                        {
-                          "$ref": "#/$defs/IdentifierComponent"
-                        },
-                        {
-                          "$ref": "#/$defs/MeasureComponent"
-                        },
-                        {
-                          "$ref": "#/$defs/AttributeComponent"
-                        },
-                        {
-                          "$ref": "#/$defs/DimensionComponent"
-                        },
-                        {
-                          "$ref": "#/$defs/ObjectReference"
-                        }
-                      ]
-                    },
-                    "minItems": 1
-                  },
-                  "cdif:has_PrimaryKey": {
-                    "$ref": "#/$defs/PrimaryKey",
-                    "description": "Variables in the structure that uniquely identify a record."
-                  },
-                  "cdif:has_ForeignKey": {
-                    "description": "Variables whose values identify records in a different dataset.",
-                    "type": "array",
-                    "items": {
-                      "anyOf": [
-                        {
-                          "$ref": "#/$defs/ForeignKey"
-                        },
-                        {
-                          "$ref": "#/$defs/ObjectReference"
-                        }
-                      ]
-                    },
-                    "minItems": 1
-                  }
-                },
-                "required": [
-                  "@type",
-                  "cdi:has_DataStructureComponent"
-                ]
+                "$ref": "#/$defs/DimensionalDataStructure"
               },
               {
-                "type": "object",
-                "description": "Structure of a long dataset (organized collection of long data). It is described by identifier, measure, attribute, variable descriptor and variable value components.",
-                "properties": {
-                  "@type": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "contains": {
-                      "const": "cdi:LongDataStructure"
-                    },
-                    "minItems": 1
-                  },
-                  "@id": {
-                    "type": "string",
-                    "description": "Identifier for this LongDataStructure node"
-                  },
-                  "cdi:has_DataStructureComponent": {
-                    "type": "array",
-                    "description": "A LongDataStructure must include exactly one IdentifierComponent, exactly one VariableDescriptorComponent, exactly one VariableValueComponent, plus zero or more AttributeComponents.",
-                    "items": {
-                      "anyOf": [
-                        {
-                          "$ref": "#/$defs/IdentifierComponent"
-                        },
-                        {
-                          "$ref": "#/$defs/VariableDescriptorComponent"
-                        },
-                        {
-                          "$ref": "#/$defs/VariableValueComponent"
-                        },
-                        {
-                          "$ref": "#/$defs/AttributeComponent"
-                        },
-                        {
-                          "$ref": "#/$defs/ObjectReference"
-                        }
-                      ]
-                    },
-                    "allOf": [
-                      {
-                        "contains": {
-                          "$ref": "#/$defs/IdentifierComponent"
-                        },
-                        "minContains": 1,
-                        "maxContains": 1
-                      },
-                      {
-                        "contains": {
-                          "$ref": "#/$defs/VariableDescriptorComponent"
-                        },
-                        "minContains": 1,
-                        "maxContains": 1
-                      },
-                      {
-                        "contains": {
-                          "$ref": "#/$defs/VariableValueComponent"
-                        },
-                        "minContains": 1,
-                        "maxContains": 1
-                      }
-                    ],
-                    "minItems": 3
-                  },
-                  "cdif:has_PrimaryKey": {
-                    "$ref": "#/$defs/PrimaryKey",
-                    "description": "Variables in the structure that uniquely identify a record."
-                  }
-                },
-                "required": [
-                  "@type",
-                  "cdi:has_DataStructureComponent"
-                ]
+                "$ref": "#/$defs/LongDataStructure"
               },
               {
-                "type": "object",
-                "description": "Structure of a wide dataset (organized collection of wide data). It is described by identifier, measure and attribute components.",
-                "properties": {
-                  "@type": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "contains": {
-                      "const": "cdi:WideDataStructure"
-                    },
-                    "minItems": 1
-                  },
-                  "@id": {
-                    "type": "string",
-                    "description": "Identifier for this WideDataStructure node"
-                  },
-                  "cdi:has_DataStructureComponent": {
-                    "type": "array",
-                    "items": {
-                      "anyOf": [
-                        {
-                          "$ref": "#/$defs/IdentifierComponent"
-                        },
-                        {
-                          "$ref": "#/$defs/MeasureComponent"
-                        },
-                        {
-                          "$ref": "#/$defs/AttributeComponent"
-                        },
-                        {
-                          "$ref": "#/$defs/ObjectReference"
-                        }
-                      ]
-                    },
-                    "minItems": 1
-                  },
-                  "cdif:has_PrimaryKey": {
-                    "$ref": "#/$defs/PrimaryKey",
-                    "description": "Variables in the structure that uniquely identify a record."
-                  },
-                  "cdif:has_ForeignKey": {
-                    "description": "Variables whose values identify records in a different dataset.",
-                    "type": "array",
-                    "items": {
-                      "anyOf": [
-                        {
-                          "$ref": "#/$defs/ForeignKey"
-                        },
-                        {
-                          "$ref": "#/$defs/ObjectReference"
-                        }
-                      ]
-                    },
-                    "minItems": 1
-                  }
-                },
-                "required": [
-                  "@type",
-                  "cdi:has_DataStructureComponent"
-                ]
+                "$ref": "#/$defs/WideDataStructure"
               },
               {
                 "$ref": "#/$defs/ObjectReference"
@@ -2970,6 +2160,443 @@
             ]
           }
         }
+      ]
+    },
+    "DataStructure": {
+      "type": "object",
+      "description": "Data organization based on reusable data structure components.",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "const": "cdi:DataStructure"
+          },
+          "minItems": 1
+        },
+        "@id": {
+          "type": "string",
+          "description": "Identifier for this DataStructure node"
+        },
+        "cdif:has_ForeignKey": {
+          "description": "Variables whose values identify records in a different dataset.",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/ForeignKey"
+              },
+              {
+                "$ref": "#/$defs/ObjectReference"
+              }
+            ]
+          },
+          "minItems": 1
+        },
+        "cdi:has_DataStructureComponent": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "title": "DDI-CDI Data Structure Component",
+                "description": "Role given to a represented variable in the context of a long or wide data structure to identify the units associated to data points, and in dimensional and key value data structures to provide identifying fields for the instance values.",
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/IdentifierComponent"
+                  },
+                  {
+                    "$ref": "#/$defs/MeasureComponent"
+                  },
+                  {
+                    "$ref": "#/$defs/AttributeComponent"
+                  },
+                  {
+                    "type": "object",
+                    "description": "Role given to a represented variable in the context of a dimensional data structure to identify the universes associated with data points. The variable acts as a field in the compound identifier (the key structure) to disambiguate the cells in the multi-dimensional \"cube\".  AG: references to the variables which are the components of a compound identifier, in which each variable is a single field - an axis - in a coordinate system addressing a location in a matrix. These variables are often categorical, but also commonly include time. Unlike other Components, they may be ordered using instances of cdi:ComponentPosition.",
+                    "properties": {
+                      "@type": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "contains": {
+                          "const": "cdi:DimensionComponent"
+                        },
+                        "minItems": 1
+                      },
+                      "@id": {
+                        "type": "string",
+                        "description": "Identifier for this DimensionComponent node"
+                      },
+                      "cdif:isDefinedBy_Variable": {
+                        "description": "The variable this component is a role of -- a RepresentedVariable or an InstanceVariable, inline or by @id reference. See the note above $defs.",
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/CdifRepresentedVariable"
+                          },
+                          {
+                            "$ref": "#/$defs/CdifInstanceVariable"
+                          },
+                          {
+                            "$ref": "#/$defs/ObjectReference"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "@type",
+                      "cdif:isDefinedBy_Variable"
+                    ]
+                  },
+                  {
+                    "$ref": "#/$defs/VariableValueComponent"
+                  },
+                  {
+                    "$ref": "#/$defs/VariableDescriptorComponent"
+                  }
+                ]
+              },
+              {
+                "$ref": "#/$defs/ObjectReference"
+              }
+            ]
+          },
+          "minItems": 1
+        },
+        "cdif:has_PrimaryKey": {
+          "$ref": "#/$defs/PrimaryKey",
+          "description": "Variables in the structure that uniquely identify a record."
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "cdi:has_DataStructureComponent"
+          ]
+        },
+        {
+          "required": [
+            "cdif:has_ForeignKey"
+          ]
+        },
+        {
+          "required": [
+            "cdif:has_PrimaryKey"
+          ]
+        }
+      ]
+    },
+    "DimensionalDataStructure": {
+      "type": "object",
+      "description": "Structure of a dimensional data set (organized collection of multidimensional data). It is described by dimension, measure and attribute components.",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "const": "cdi:DimensionalDataStructure"
+          },
+          "minItems": 1
+        },
+        "@id": {
+          "type": "string",
+          "description": "Identifier for this DimensionalDataStructure node"
+        },
+        "cdi:has_DataStructureComponent": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/IdentifierComponent"
+              },
+              {
+                "$ref": "#/$defs/MeasureComponent"
+              },
+              {
+                "$ref": "#/$defs/AttributeComponent"
+              },
+              {
+                "type": "object",
+                "description": "Role given to a represented variable in the context of a dimensional data structure to identify the universes associated with data points. The variable acts as a field in the compound identifier (the key structure) to disambiguate the cells in the multi-dimensional \"cube\".  AG: references to the variables which are the components of a compound identifier, in which each variable is a single field - an axis - in a coordinate system addressing a location in a matrix. These variables are often categorical, but also commonly include time. Unlike other Components, they may be ordered using instances of cdi:ComponentPosition.",
+                "properties": {
+                  "@type": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "contains": {
+                      "const": "cdi:DimensionComponent"
+                    },
+                    "minItems": 1
+                  },
+                  "@id": {
+                    "type": "string",
+                    "description": "Identifier for this DimensionComponent node"
+                  },
+                  "cdif:isDefinedBy_Variable": {
+                    "description": "The variable this component is a role of -- a RepresentedVariable or an InstanceVariable, inline or by @id reference. See the note above $defs.",
+                    "anyOf": [
+                      {
+                        "$ref": "#/$defs/CdifRepresentedVariable"
+                      },
+                      {
+                        "$ref": "#/$defs/CdifInstanceVariable"
+                      },
+                      {
+                        "$ref": "#/$defs/ObjectReference"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "@type",
+                  "cdif:isDefinedBy_Variable"
+                ]
+              },
+              {
+                "$ref": "#/$defs/ObjectReference"
+              }
+            ]
+          },
+          "minItems": 1
+        },
+        "cdif:has_PrimaryKey": {
+          "$ref": "#/$defs/PrimaryKey",
+          "description": "Variables in the structure that uniquely identify a record."
+        },
+        "cdif:has_ForeignKey": {
+          "description": "Variables whose values identify records in a different dataset.",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/ForeignKey"
+              },
+              {
+                "$ref": "#/$defs/ObjectReference"
+              }
+            ]
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "@type",
+        "cdi:has_DataStructureComponent"
+      ]
+    },
+    "LongDataStructure": {
+      "type": "object",
+      "description": "Structure of a long dataset (organized collection of long data). It is described by identifier, measure, attribute, variable descriptor and variable value components.",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "const": "cdi:LongDataStructure"
+          },
+          "minItems": 1
+        },
+        "@id": {
+          "type": "string",
+          "description": "Identifier for this LongDataStructure node"
+        },
+        "cdi:has_DataStructureComponent": {
+          "type": "array",
+          "description": "A LongDataStructure must include exactly one IdentifierComponent, exactly one VariableDescriptorComponent, exactly one VariableValueComponent, plus zero or more AttributeComponents.",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/IdentifierComponent"
+              },
+              {
+                "$ref": "#/$defs/VariableDescriptorComponent"
+              },
+              {
+                "$ref": "#/$defs/VariableValueComponent"
+              },
+              {
+                "$ref": "#/$defs/AttributeComponent"
+              },
+              {
+                "$ref": "#/$defs/ObjectReference"
+              }
+            ]
+          },
+          "allOf": [
+            {
+              "contains": {
+                "$ref": "#/$defs/IdentifierComponent"
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "#/$defs/VariableDescriptorComponent"
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "#/$defs/VariableValueComponent"
+              },
+              "minContains": 1,
+              "maxContains": 1
+            }
+          ],
+          "minItems": 3
+        },
+        "cdif:has_PrimaryKey": {
+          "$ref": "#/$defs/PrimaryKey",
+          "description": "Variables in the structure that uniquely identify a record."
+        }
+      },
+      "required": [
+        "@type",
+        "cdi:has_DataStructureComponent"
+      ]
+    },
+    "WideDataStructure": {
+      "type": "object",
+      "description": "Structure of a wide dataset (organized collection of wide data). It is described by identifier, measure and attribute components.",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "const": "cdi:WideDataStructure"
+          },
+          "minItems": 1
+        },
+        "@id": {
+          "type": "string",
+          "description": "Identifier for this WideDataStructure node"
+        },
+        "cdi:has_DataStructureComponent": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/IdentifierComponent"
+              },
+              {
+                "$ref": "#/$defs/MeasureComponent"
+              },
+              {
+                "$ref": "#/$defs/AttributeComponent"
+              },
+              {
+                "$ref": "#/$defs/ObjectReference"
+              }
+            ]
+          },
+          "minItems": 1
+        },
+        "cdif:has_PrimaryKey": {
+          "$ref": "#/$defs/PrimaryKey",
+          "description": "Variables in the structure that uniquely identify a record."
+        },
+        "cdif:has_ForeignKey": {
+          "description": "Variables whose values identify records in a different dataset.",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/ForeignKey"
+              },
+              {
+                "$ref": "#/$defs/ObjectReference"
+              }
+            ]
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "@type",
+        "cdi:has_DataStructureComponent"
+      ]
+    },
+    "ForeignKey": {
+      "type": "object",
+      "description": "A set of variables whose values reference a primary key elsewhere. cdif:, not cdi:, throughout: this is a CDIF simplification, not the DDI-CDI shape. DDI-CDI composes a foreign key from cdi:ForeignKeyComponent nodes, each with cdi:correspondsTo and cdi:references; this form composes the variables directly, each carrying cdif:position. The prefix is what makes that divergence visible, and it matches the sibling cdif:Key. Until 2026-09-05 the definition required 'cdif:isComposedOf' while declaring 'cdi:isComposedOf', so it could only be satisfied by an undeclared and therefore unconstrained property.",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "const": "cdif:ForeignKey"
+          },
+          "minItems": 1
+        },
+        "@id": {
+          "type": "string",
+          "description": "Identifier for this ForeignKey node"
+        },
+        "cdif:isComposedOf": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Ordered list of cdi:ComponentPosition wrappers, one per key component, matching the sibling cdif:Key. The position sits on the wrapper rather than on the variable, and that is load-bearing: an earlier form required cdif:position on the item itself, which made the objectReference branch unsatisfiable, because objectReference is sealed with additionalProperties false. A key could then only be written by inlining whole variables, duplicating what schema:variableMeasured already holds.",
+          "items": {
+            "type": "object",
+            "description": "cdi:ComponentPosition wrapper indexing one variable's position in the key.",
+            "properties": {
+              "@type": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "contains": {
+                  "const": "cdi:ComponentPosition"
+                },
+                "minItems": 1
+              },
+              "@id": {
+                "type": "string",
+                "description": "Identifier for this ComponentPosition node."
+              },
+              "cdi:indexes": {
+                "$ref": "#/$defs/ObjectReference",
+                "description": "The variable this position indexes -- an @id-reference to one declared elsewhere in the document, matching cdi:indexes on PrimaryKey. A key names variables that are defined once and referenced from the key, so an inline variable here would be a second copy of a node that already exists; framing inlines the target and the embedded copy then had to be told apart from authored content."
+              },
+              "cdi:value": {
+                "type": "integer",
+                "minimum": 1,
+                "default": 1,
+                "description": "1-based position of this variable in the ordered key."
+              }
+            },
+            "required": [
+              "@type",
+              "cdi:indexes",
+              "cdi:value"
+            ]
+          }
+        },
+        "cdif:references_PrimaryKey": {
+          "$ref": "#/$defs/ObjectReference",
+          "description": "references a primary key in a different dataset"
+        }
+      },
+      "required": [
+        "@type",
+        "cdif:isComposedOf",
+        "cdif:references_PrimaryKey"
       ]
     },
     "IdentifierComponent": {
@@ -3029,11 +2656,18 @@
           "description": "Identifier for this MeasureComponent node"
         },
         "cdif:name": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1,
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            }
+          ],
           "description": "Human understandable name (linguistic signifier, word, phrase, or mnemonic). May follow ISO/IEC 11179-5 naming principles, and have context provided to specify usage."
         },
         "cdif:identifier": {
@@ -3174,44 +2808,6 @@
       },
       "required": [
         "@type"
-      ]
-    },
-    "DimensionComponent": {
-      "type": "object",
-      "description": "Role given to a represented variable in the context of a dimensional data structure to identify the universes associated with data points. The variable acts as a field in the compound identifier (the key structure) to disambiguate the cells in the multi-dimensional \"cube\".  AG: references to the variables which are the components of a compound identifier, in which each variable is a single field - an axis - in a coordinate system addressing a location in a matrix. These variables are often categorical, but also commonly include time. Unlike other Components, they may be ordered using instances of cdi:ComponentPosition.",
-      "properties": {
-        "@type": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "contains": {
-            "const": "cdi:DimensionComponent"
-          },
-          "minItems": 1
-        },
-        "@id": {
-          "type": "string",
-          "description": "Identifier for this DimensionComponent node"
-        },
-        "cdif:isDefinedBy_Variable": {
-          "description": "The variable this component is a role of -- a RepresentedVariable or an InstanceVariable, inline or by @id reference. See the note above $defs.",
-          "anyOf": [
-            {
-              "$ref": "#/$defs/CdifRepresentedVariable"
-            },
-            {
-              "$ref": "#/$defs/CdifInstanceVariable"
-            },
-            {
-              "$ref": "#/$defs/ObjectReference"
-            }
-          ]
-        }
-      },
-      "required": [
-        "@type",
-        "cdif:isDefinedBy_Variable"
       ]
     },
     "VariableValueComponent": {
@@ -3363,11 +2959,18 @@
               ]
             },
             "cdif:name": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "minItems": 1,
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1
+                }
+              ],
               "description": "Human understandable name (linguistic signifier, word, phrase, or mnemonic). May follow ISO/IEC 11179-5 naming principles, and have context provided to specify usage."
             }
           },
@@ -4082,10 +3685,18 @@
                   "minItems": 1
                 },
                 "cdif:name": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "minItems": 1
+                    }
+                  ],
                   "description": "Human-understandable name(s). CDIF-simplified from DDI-CDI Category.name (ObjectName) to plain strings."
                 },
                 "cdif:descriptiveText": {
@@ -4182,75 +3793,6 @@
         "@type",
         "cdi:for",
         "cdi:statistic"
-      ]
-    },
-    "ForeignKey": {
-      "type": "object",
-      "description": "A set of variables whose values reference a primary key elsewhere. cdif:, not cdi:, throughout: this is a CDIF simplification, not the DDI-CDI shape. DDI-CDI composes a foreign key from cdi:ForeignKeyComponent nodes, each with cdi:correspondsTo and cdi:references; this form composes the variables directly, each carrying cdif:position. The prefix is what makes that divergence visible, and it matches the sibling cdif:Key. Until 2026-09-05 the definition required 'cdif:isComposedOf' while declaring 'cdi:isComposedOf', so it could only be satisfied by an undeclared and therefore unconstrained property.",
-      "properties": {
-        "@type": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "contains": {
-            "const": "cdif:ForeignKey"
-          },
-          "minItems": 1
-        },
-        "@id": {
-          "type": "string",
-          "description": "Identifier for this ForeignKey node"
-        },
-        "cdif:isComposedOf": {
-          "type": "array",
-          "minItems": 1,
-          "description": "Ordered list of cdi:ComponentPosition wrappers, one per key component, matching the sibling cdif:Key. The position sits on the wrapper rather than on the variable, and that is load-bearing: an earlier form required cdif:position on the item itself, which made the objectReference branch unsatisfiable, because objectReference is sealed with additionalProperties false. A key could then only be written by inlining whole variables, duplicating what schema:variableMeasured already holds.",
-          "items": {
-            "type": "object",
-            "description": "cdi:ComponentPosition wrapper indexing one variable's position in the key.",
-            "properties": {
-              "@type": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "contains": {
-                  "const": "cdi:ComponentPosition"
-                },
-                "minItems": 1
-              },
-              "@id": {
-                "type": "string",
-                "description": "Identifier for this ComponentPosition node."
-              },
-              "cdi:indexes": {
-                "$ref": "#/$defs/ObjectReference",
-                "description": "The variable this position indexes -- an @id-reference to one declared elsewhere in the document, matching cdi:indexes on PrimaryKey. A key names variables that are defined once and referenced from the key, so an inline variable here would be a second copy of a node that already exists; framing inlines the target and the embedded copy then had to be told apart from authored content."
-              },
-              "cdi:value": {
-                "type": "integer",
-                "minimum": 1,
-                "default": 1,
-                "description": "1-based position of this variable in the ordered key."
-              }
-            },
-            "required": [
-              "@type",
-              "cdi:indexes",
-              "cdi:value"
-            ]
-          }
-        },
-        "cdif:references": {
-          "$ref": "#/$defs/ObjectReference",
-          "description": "references a primary key in a different dataset"
-        }
-      },
-      "required": [
-        "@type",
-        "cdif:isComposedOf",
-        "cdif:references"
       ]
     },
     "LanguageTaggedValue": {

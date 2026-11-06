@@ -336,10 +336,9 @@ cdifd:CDIFVariableMeasuredShape a sh:NodeShape ;
       }""" ] .
 
 cdifd:CDIFxasInstanceVariableShape a sh:NodeShape ;
-    sh:property [ sh:message "for cdi InstanceVariable a physical data type should be provided." ;
-            sh:minCount 1 ;
+    sh:property [ sh:message "a cdif:physicalDataType must be an IRI, a non-empty string, or a schema:DefinedTerm carrying an identifier." ;
             sh:or ( [ sh:nodeKind sh:IRI ] [ sh:datatype xsd:string ;
-                        sh:minLength 5 ] [ sh:class schema:DefinedTerm ;
+                        sh:minLength 1 ] [ sh:class schema:DefinedTerm ;
                         sh:property [ sh:message "a defined term should have an identifier that is a resolvable URI" ;
                                 sh:minCount 1 ;
                                 sh:or ( [ sh:datatype xsd:string ;
@@ -353,11 +352,18 @@ cdifd:CDIFxasInstanceVariableShape a sh:NodeShape ;
                                                                             sh:pattern "^https?:\\/\\/[^\\s]+$" ] ] ) ] ) ] ) ;
                                 sh:path schema:identifier ] ] ) ;
             sh:path <https://w3id.org/cdif/physicalDataType> ;
+            sh:severity sh:Warning ],
+        [ sh:message "for cdi InstanceVariable a physical data type should be provided." ;
+            sh:minCount 1 ;
+            sh:path <https://w3id.org/cdif/physicalDataType> ;
             sh:severity sh:Warning ] ;
     sh:targetClass cdi:InstanceVariable .
 
 cdifd:InstanceVariableRepresentedVariableExclusivityShape a sh:NodeShape ;
     sh:property [ sh:maxCount 0 ;
+            sh:message "cdif:definition is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
+            sh:path <https://w3id.org/cdif/definition> ],
+        [ sh:maxCount 0 ;
             sh:message "cdi:takesSubstantiveValuesFrom is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must be declared on the RepresentedVariable, not duplicated on the InstanceVariable." ;
             sh:path cdi:takesSubstantiveValuesFrom ],
         [ sh:maxCount 0 ;
@@ -380,10 +386,7 @@ cdifd:InstanceVariableRepresentedVariableExclusivityShape a sh:NodeShape ;
             sh:path <https://w3id.org/cdif/externalDefinition> ],
         [ sh:maxCount 0 ;
             sh:message "cdif:uses_Concept is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
-            sh:path <https://w3id.org/cdif/uses_Concept> ],
-        [ sh:maxCount 0 ;
-            sh:message "cdif:definition is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
-            sh:path <https://w3id.org/cdif/definition> ] ;
+            sh:path <https://w3id.org/cdif/uses_Concept> ] ;
     sh:severity sh:Violation ;
     sh:target [ a sh:SPARQLTarget ;
             sh:prefixes ( [ sh:namespace "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/" ;

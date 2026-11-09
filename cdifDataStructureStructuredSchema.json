@@ -3,6 +3,17 @@
   "title": "DDI-CDI Data Structure",
   "description": "Adds data-structure description to a CDIF metadata record. Defines the cdi:DataStructure family of types ($defs DataStructure / DimensionalDataStructure / LongDataStructure / WideDataStructure, plus the supporting Component / Key / RepresentedVariable types). A distribution attaches a structure via cdi:isStructuredBy on its schema:DataDownload item; the structure value is any of the four DataStructure variants. Metadata records must declare conformance to cdif/data_structure/1.0.",
   "type": "object",
+  "properties": {
+    "@context": {
+      "type": "object",
+      "description": "JSON-LD namespace prefixes for data structure description.",
+      "properties": {
+        "cdif": {
+          "const": "https://w3id.org/cdif/"
+        }
+      }
+    }
+  },
   "if": {
     "required": [
       "@type"

@@ -79,7 +79,7 @@ An instance dataset description that includes this profile must declare conforma
   "@type": ["schema:Dataset", "dcat:CatalogRecord"],
   "schema:additionalType": [{"@id": "dcat:CatalogRecord"}],
   "dcterms:conformsTo": [
-    {"@id": "https://w3id.org/cdif/data_structure/1.1"}
+    {"@id": "https://w3id.org/cdif/data_structure/2.0"}
   ]
 }
 ```
@@ -90,7 +90,7 @@ Three placements satisfy this, and any one of them is enough:
 
 - **On the download** — the ordinary case, where the distribution is the data.
 - **On a WebAPI action result** — a `schema:WebAPI` carries no data itself; the thing that does is the `schema:result` of its `schema:potentialAction`, which is typed `schema:DataDownload`.
-- **On the parts of a bundle** — a distribution holding several datasets asserts the structure on each `schema:hasPart`, not on the container, since one structure over the whole archive would say something of the file that is true of only some of its members. Where several parts share a layout, state it inline on one and carry an `@id` reference to that node on the others. Note that the parts are defined by the **manifest** profile (`schema:MediaObject`, deliberately not `schema:DataDownload` — they are not independently retrievable). A record whose distribution carries `schema:hasPart` **must** therefore also declare conformance to `https://w3id.org/cdif/manifest/1.1`, and the schema enforces this: without the manifest profile nothing validates the parts themselves, so a structure could be asserted on a part that no rule has checked. The requirement is triggered by the presence of `schema:hasPart` on any distribution, not by where the structure happens to be attached.
+- **On the parts of a bundle** — a distribution holding several datasets asserts the structure on each `schema:hasPart`, not on the container, since one structure over the whole archive would say something of the file that is true of only some of its members. Where several parts share a layout, state it inline on one and carry an `@id` reference to that node on the others. Note that the parts are defined by the **manifest** profile (`schema:MediaObject`, deliberately not `schema:DataDownload` — they are not independently retrievable). A record whose distribution carries `schema:hasPart` **must** therefore also declare conformance to `https://w3id.org/cdif/manifest/2.0`, and the schema enforces this: without the manifest profile nothing validates the parts themselves, so a structure could be asserted on a part that no rule has checked. The requirement is triggered by the presence of `schema:hasPart` on any distribution, not by where the structure happens to be attached.
 
 ### Standalone DataStructure
 
@@ -650,7 +650,7 @@ These classes appear in the DataStructure UML model because the profile referenc
 
 * **Cardinality:** Required, repeatable
 * **Content:** object reference
-* **Description:** Identifiers for the conformance classes/profiles the metadata record follows. For the Data Structure profile this must include `https://w3id.org/cdif/data_structure/1.1`. Records that also conform to Core, Discovery, Data Description (etc.) list those profile identifiers as well.
+* **Description:** Identifiers for the conformance classes/profiles the metadata record follows. For the Data Structure profile this must include `https://w3id.org/cdif/data_structure/2.0`. Records that also conform to Core, Discovery, Data Description (etc.) list those profile identifiers as well.
 
 ### schema:description
 

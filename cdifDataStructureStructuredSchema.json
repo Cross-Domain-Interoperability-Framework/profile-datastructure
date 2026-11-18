@@ -61,7 +61,7 @@
     ]
   },
   "else": {
-    "description": "A CDIF dataset described by a data structure. Must declare conformance to data_structure/2.0 and attach the structure to a distribution.",
+    "description": "A CDIF dataset described by a data structure. Must declare conformance to data_structure/1.1 and attach the structure to a distribution.",
     "required": [
       "schema:subjectOf",
       "schema:distribution"

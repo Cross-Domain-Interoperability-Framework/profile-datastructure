@@ -629,6 +629,12 @@ cdifd:cdifKeyShape a sh:NodeShape ;
             sh:severity sh:Violation ] ;
     sh:targetClass <https://w3id.org/cdif/Key> .
 
+cdifd:cdifQualifiesTargetShape a sh:NodeShape ;
+    sh:message "cdif:qualifies must not point at another cdi:AttributeComponent: its target is the component whose observations are being qualified. The JSON Schema enforces this for an inline target; this shape covers a target given as an {@id} reference." ;
+    sh:not [ sh:class cdi:AttributeComponent ] ;
+    sh:severity sh:Violation ;
+    sh:targetObjectsOf <https://w3id.org/cdif/qualifies> .
+
 cdifd:cdifRepresentedVariable_ConceptSystemShape a sh:NodeShape ;
     sh:property [ sh:message "A cdi:ConceptSystem may carry cdif:has_Concept members (the concepts it structures)." ;
             sh:path <https://w3id.org/cdif/has_Concept> ;
@@ -692,6 +698,76 @@ cdifd:cdifSubstantiveValueDomainShape a sh:NodeShape ;
             sh:severity sh:Warning ] ;
     sh:severity sh:Violation ;
     sh:targetClass <https://w3id.org/cdif/SubstantiveValueDomain> .
+
+cdifd:cdifValueAndConceptDescriptionBoundsShape a sh:NodeShape ;
+    sh:severity sh:Violation ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            sh:message "cdi:maximumValueInclusive and cdi:maximumValueExclusive both state the upper limit, and nothing checks that the two agree. W3C tabular-metadata 5.11.2, the source of these properties, treats specifying both as an error: keep one." ;
+            sh:prefixes ( [ sh:namespace "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/" ;
+                        sh:prefix "cdi" ] ) ;
+            sh:select """
+			PREFIX cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/>
+			SELECT DISTINCT $this (cdi:maximumValueInclusive AS ?path) (?inc AS ?value)
+			WHERE {
+				$this cdi:maximumValueInclusive ?inc .
+				$this cdi:maximumValueExclusive ?exc .
+			}""" ],
+        [ a sh:SPARQLConstraint ;
+            sh:message "cdi:minimumValueInclusive and cdi:minimumValueExclusive both state the lower limit, and nothing checks that the two agree. W3C tabular-metadata 5.11.2, the source of these properties, treats specifying both as an error: keep one." ;
+            sh:prefixes ( [ sh:namespace "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/" ;
+                        sh:prefix "cdi" ] ) ;
+            sh:select """
+			PREFIX cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/>
+			SELECT DISTINCT $this (cdi:minimumValueInclusive AS ?path) (?inc AS ?value)
+			WHERE {
+				$this cdi:minimumValueInclusive ?inc .
+				$this cdi:minimumValueExclusive ?exc .
+			}""" ] ;
+    sh:targetClass cdi:ValueAndConceptDescription .
+
+cdifd:cdifValueDomainContinuousNotEnumerableShape a sh:NodeShape ;
+    sh:severity sh:Violation ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            sh:message "A value domain classified Continuous cannot also take its values from an enumeration: a continuous scale has uncountably many values. Either drop cdif:takesValuesFrom, or classify the domain Nominal or Ordinal." ;
+            sh:prefixes ( [ sh:namespace "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/" ;
+                        sh:prefix "cdi" ] [ sh:namespace "https://w3id.org/cdif/" ;
+                        sh:prefix "cdif" ] ) ;
+            sh:select """
+			PREFIX cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/>
+			PREFIX cdif: <https://w3id.org/cdif/>
+			SELECT DISTINCT $this (cdif:takesValuesFrom AS ?path) (?level AS ?value)
+			WHERE {
+				$this cdif:takesValuesFrom ?enum .
+				$this cdi:isDescribedBy ?vacd .
+				?vacd cdi:classificationLevel ?level .
+				FILTER (STR(?level) = "Continuous")
+			}""" ] ;
+    sh:targetClass <https://w3id.org/cdif/SentinelValueDomain>,
+        <https://w3id.org/cdif/SubstantiveValueDomain> .
+
+cdifd:cdifValueDomainEnumerationRedundancyShape a sh:NodeShape ;
+    sh:severity sh:Warning ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            sh:message "This value domain names an enumeration in cdif:takesValuesFrom and also defines its values by a bound or a logical expression. The codelist and the description then state the value set twice, with nothing checking that the two agree; prefer the codelist, and keep cdi:isDescribedBy for cdi:classificationLevel and cdi:description." ;
+            sh:prefixes ( [ sh:namespace "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/" ;
+                        sh:prefix "cdi" ] [ sh:namespace "https://w3id.org/cdif/" ;
+                        sh:prefix "cdif" ] ) ;
+            sh:select """
+			PREFIX cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/>
+			PREFIX cdif: <https://w3id.org/cdif/>
+			SELECT DISTINCT $this (?p AS ?path) (?v AS ?value)
+			WHERE {
+				$this cdif:takesValuesFrom ?enum .
+				$this cdi:isDescribedBy ?vacd .
+				?vacd ?p ?v .
+				FILTER (?p IN (
+					cdif:logicalExpression,
+					cdi:minimumValueInclusive, cdi:minimumValueExclusive,
+					cdi:maximumValueInclusive, cdi:maximumValueExclusive
+				))
+			}""" ] ;
+    sh:targetClass <https://w3id.org/cdif/SentinelValueDomain>,
+        <https://w3id.org/cdif/SubstantiveValueDomain> .
 
 cdifd:cdifVariableDescriptorComponentShape a sh:NodeShape ;
     sh:property [ sh:message "A cdi:VariableDescriptorComponent must carry an inline cdi:DescriptorVariable via cdif:isDefinedBy_DescriptorVariable." ;

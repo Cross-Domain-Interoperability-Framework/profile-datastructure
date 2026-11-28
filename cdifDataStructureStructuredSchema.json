@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "DDI-CDI Data Structure",
-  "description": "Adds data-structure description to a CDIF metadata record. Defines the cdi:DataStructure family of types ($defs DataStructure / DimensionalDataStructure / LongDataStructure / WideDataStructure, plus the supporting Component / Key / RepresentedVariable types). A distribution attaches a structure via cdi:isStructuredBy on its schema:DataDownload item; the structure value is any of the four DataStructure variants. Metadata records must declare conformance to cdif/data_structure/1.0.",
+  "description": "Adds data-structure description to a CDIF metadata record. Defines the three data-structure layouts ($defs DimensionalDataStructure / LongDataStructure / WideDataStructure, plus the supporting Component / Key / RepresentedVariable types). A distribution attaches a structure via cdi:isStructuredBy on its schema:DataDownload item; the structure value is one of the three layouts. cdi:DataStructure is abstract and never appears in a record. Metadata records must declare conformance to cdif/data_structure/2.0.",
   "type": "object",
   "properties": {
     "@context": {
@@ -33,13 +33,10 @@
     }
   },
   "then": {
-    "description": "Standalone data-structure object (one of the four variants). The structure is the subject of the record, not something attached to downloadable data, so no schema:DataDownload appears: a distribution here would be describing a different resource than the one the record is about.",
+    "description": "Standalone data-structure object (one of the three layouts). The structure is the subject of the record, not something attached to downloadable data, so no schema:DataDownload appears: a distribution here would be describing a different resource than the one the record is about.",
     "allOf": [
       {
         "anyOf": [
-          {
-            "$ref": "#/$defs/DataStructure"
-          },
           {
             "$ref": "#/$defs/DimensionalDataStructure"
           },
@@ -839,11 +836,8 @@
     "IsStructuredByProperty": {
       "anyOf": [
         {
-          "description": "Reusable data-structure description for this distribution. One of the four DataStructure variants (DataStructure, Dimensional, Long, Wide) as an inline definition, or an @id reference to one declared elsewhere in the document or published at a resolvable URI. (A profile may further require the inline form via SHACL.)",
+          "description": "Reusable data-structure description for this distribution. One of the three layouts (Dimensional, Long, Wide) as an inline definition, or an @id reference to one declared elsewhere in the document or published at a resolvable URI. (A profile may further require the inline form via SHACL.)",
           "anyOf": [
-            {
-              "$ref": "#/$defs/DataStructure"
-            },
             {
               "$ref": "#/$defs/DimensionalDataStructure"
             },
@@ -862,11 +856,8 @@
           "type": "array",
           "minItems": 1,
           "items": {
-            "description": "Reusable data-structure description for this distribution. One of the four DataStructure variants (DataStructure, Dimensional, Long, Wide) as an inline definition, or an @id reference to one declared elsewhere in the document or published at a resolvable URI. (A profile may further require the inline form via SHACL.)",
+            "description": "Reusable data-structure description for this distribution. One of the three layouts (Dimensional, Long, Wide) as an inline definition, or an @id reference to one declared elsewhere in the document or published at a resolvable URI. (A profile may further require the inline form via SHACL.)",
             "anyOf": [
-              {
-                "$ref": "#/$defs/DataStructure"
-              },
               {
                 "$ref": "#/$defs/DimensionalDataStructure"
               },
@@ -884,100 +875,6 @@
         }
       ]
     },
-    "DataStructure": {
-      "type": "object",
-      "description": "Data organization based on reusable data structure components.",
-      "properties": {
-        "@type": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "contains": {
-            "const": "cdi:DataStructure"
-          },
-          "minItems": 1
-        },
-        "@id": {
-          "type": "string",
-          "description": "Identifier for this DataStructure node"
-        },
-        "cdif:has_ForeignKey": {
-          "description": "Variables whose values identify records in a different dataset.",
-          "type": "array",
-          "items": {
-            "anyOf": [
-              {
-                "$ref": "#/$defs/ForeignKey"
-              },
-              {
-                "$ref": "#/$defs/ObjectReference"
-              }
-            ]
-          },
-          "minItems": 1
-        },
-        "cdi:has_DataStructureComponent": {
-          "type": "array",
-          "items": {
-            "anyOf": [
-              {
-                "title": "DDI-CDI Data Structure Component",
-                "description": "Role given to a represented variable in the context of a long or wide data structure to identify the units associated to data points, and in dimensional and key value data structures to provide identifying fields for the instance values.",
-                "anyOf": [
-                  {
-                    "$ref": "#/$defs/IdentifierComponent"
-                  },
-                  {
-                    "$ref": "#/$defs/MeasureComponent"
-                  },
-                  {
-                    "$ref": "#/$defs/AttributeComponent"
-                  },
-                  {
-                    "$ref": "#/$defs/DimensionComponent"
-                  },
-                  {
-                    "$ref": "#/$defs/VariableValueComponent"
-                  },
-                  {
-                    "$ref": "#/$defs/VariableDescriptorComponent"
-                  }
-                ]
-              },
-              {
-                "$ref": "#/$defs/ObjectReference"
-              }
-            ]
-          },
-          "minItems": 1
-        },
-        "cdif:has_PrimaryKey": {
-          "$ref": "#/$defs/PrimaryKey",
-          "description": "Variables in the structure that uniquely identify a record."
-        }
-      },
-      "required": [
-        "@type"
-      ],
-      "anyOf": [
-        {
-          "required": [
-            "cdi:has_DataStructureComponent"
-          ]
-        },
-        {
-          "required": [
-            "cdif:has_ForeignKey"
-          ]
-        },
-        {
-          "required": [
-            "cdif:has_PrimaryKey"
-          ]
-        }
-      ]
-    },
     "DimensionalDataStructure": {
       "type": "object",
       "description": "Structure of a dimensional data set (organized collection of multidimensional data). It is described by dimension, measure and attribute components.",
@@ -989,6 +886,11 @@
           },
           "contains": {
             "const": "cdi:DimensionalDataStructure"
+          },
+          "not": {
+            "contains": {
+              "const": "cdi:DataStructure"
+            }
           },
           "minItems": 1
         },
@@ -1010,7 +912,57 @@
                 "$ref": "#/$defs/AttributeComponent"
               },
               {
-                "$ref": "#/$defs/DimensionComponent"
+                "description": "Role given to a represented variable in the context of a dimensional data structure to identify the universes associated with data points. The variable acts as a field in the compound identifier (the key structure) to disambiguate the cells in the multi-dimensional \"cube\".  AG: references to the variables which are the components of a compound identifier, in which each variable is a single field - an axis - in a coordinate system addressing a location in a matrix. These variables are often categorical, but also commonly include time. Unlike other Components, they may be ordered using instances of cdi:ComponentPosition.",
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/DataStructureComponent"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@type": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "contains": {
+                          "const": "cdi:DimensionComponent"
+                        },
+                        "minItems": 1
+                      },
+                      "cdif:categoricalAdditivity": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Indicates whether categories at a specific level can be combined to provide the value for their shared parent category. Value is True if categories can be added together (collapsed) to create higher-level categories. An example would be age categories: five-year age categories can be collapsed into 10-year age categories."
+                      }
+                    },
+                    "required": [
+                      "@type",
+                      "cdif:isDefinedBy_Variable"
+                    ]
+                  }
+                ]
+              },
+              {
+                "$ref": "#/$defs/ObjectReference"
+              }
+            ]
+          },
+          "contains": {
+            "anyOf": [
+              {
+                "type": "object",
+                "required": [
+                  "@type"
+                ],
+                "properties": {
+                  "@type": {
+                    "type": "array",
+                    "contains": {
+                      "const": "cdi:DimensionComponent"
+                    }
+                  }
+                }
               },
               {
                 "$ref": "#/$defs/ObjectReference"
@@ -1029,7 +981,73 @@
           "items": {
             "anyOf": [
               {
-                "$ref": "#/$defs/ForeignKey"
+                "type": "object",
+                "description": "A set of variables whose values reference a primary key elsewhere. cdif:, not cdi:, throughout: this is a CDIF simplification, not the DDI-CDI shape. DDI-CDI composes a foreign key from cdi:ForeignKeyComponent nodes, each with cdi:correspondsTo and cdi:references; this form composes the variables directly, each carrying cdif:position. The prefix is what makes that divergence visible, and it matches the sibling cdif:Key. Until 2026-09-05 the definition required 'cdif:isComposedOf' while declaring 'cdi:isComposedOf', so it could only be satisfied by an undeclared and therefore unconstrained property.",
+                "properties": {
+                  "@type": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "contains": {
+                      "const": "cdif:ForeignKey"
+                    },
+                    "minItems": 1
+                  },
+                  "@id": {
+                    "type": "string",
+                    "description": "Identifier for this ForeignKey node"
+                  },
+                  "cdif:isComposedOf": {
+                    "type": "array",
+                    "minItems": 1,
+                    "description": "Ordered list of cdi:ComponentPosition wrappers, one per key component, matching the sibling cdif:Key. The position sits on the wrapper rather than on the variable, and that is load-bearing: an earlier form required cdif:position on the item itself, which made the objectReference branch unsatisfiable, because objectReference is sealed with additionalProperties false. A key could then only be written by inlining whole variables, duplicating what schema:variableMeasured already holds.",
+                    "items": {
+                      "type": "object",
+                      "description": "cdi:ComponentPosition wrapper indexing one variable's position in the key.",
+                      "properties": {
+                        "@type": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "contains": {
+                            "const": "cdi:ComponentPosition"
+                          },
+                          "minItems": 1
+                        },
+                        "@id": {
+                          "type": "string",
+                          "description": "Identifier for this ComponentPosition node."
+                        },
+                        "cdi:indexes": {
+                          "$ref": "#/$defs/ObjectReference",
+                          "description": "The variable this position indexes -- an @id-reference to one declared elsewhere in the document, matching cdi:indexes on PrimaryKey. A key names variables that are defined once and referenced from the key, so an inline variable here would be a second copy of a node that already exists; framing inlines the target and the embedded copy then had to be told apart from authored content."
+                        },
+                        "cdi:value": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "default": 1,
+                          "description": "1-based position of this variable in the ordered key."
+                        }
+                      },
+                      "required": [
+                        "@type",
+                        "cdi:indexes",
+                        "cdi:value"
+                      ]
+                    }
+                  },
+                  "cdif:references_PrimaryKey": {
+                    "$ref": "#/$defs/ObjectReference",
+                    "description": "references a primary key in a different dataset"
+                  }
+                },
+                "required": [
+                  "@type",
+                  "cdif:isComposedOf",
+                  "cdif:references_PrimaryKey"
+                ]
               },
               {
                 "$ref": "#/$defs/ObjectReference"
@@ -1055,6 +1073,11 @@
           },
           "contains": {
             "const": "cdi:LongDataStructure"
+          },
+          "not": {
+            "contains": {
+              "const": "cdi:DataStructure"
+            }
           },
           "minItems": 1
         },
@@ -1131,6 +1154,11 @@
           "contains": {
             "const": "cdi:WideDataStructure"
           },
+          "not": {
+            "contains": {
+              "const": "cdi:DataStructure"
+            }
+          },
           "minItems": 1
         },
         "@id": {
@@ -1167,7 +1195,73 @@
           "items": {
             "anyOf": [
               {
-                "$ref": "#/$defs/ForeignKey"
+                "type": "object",
+                "description": "A set of variables whose values reference a primary key elsewhere. cdif:, not cdi:, throughout: this is a CDIF simplification, not the DDI-CDI shape. DDI-CDI composes a foreign key from cdi:ForeignKeyComponent nodes, each with cdi:correspondsTo and cdi:references; this form composes the variables directly, each carrying cdif:position. The prefix is what makes that divergence visible, and it matches the sibling cdif:Key. Until 2026-09-05 the definition required 'cdif:isComposedOf' while declaring 'cdi:isComposedOf', so it could only be satisfied by an undeclared and therefore unconstrained property.",
+                "properties": {
+                  "@type": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "contains": {
+                      "const": "cdif:ForeignKey"
+                    },
+                    "minItems": 1
+                  },
+                  "@id": {
+                    "type": "string",
+                    "description": "Identifier for this ForeignKey node"
+                  },
+                  "cdif:isComposedOf": {
+                    "type": "array",
+                    "minItems": 1,
+                    "description": "Ordered list of cdi:ComponentPosition wrappers, one per key component, matching the sibling cdif:Key. The position sits on the wrapper rather than on the variable, and that is load-bearing: an earlier form required cdif:position on the item itself, which made the objectReference branch unsatisfiable, because objectReference is sealed with additionalProperties false. A key could then only be written by inlining whole variables, duplicating what schema:variableMeasured already holds.",
+                    "items": {
+                      "type": "object",
+                      "description": "cdi:ComponentPosition wrapper indexing one variable's position in the key.",
+                      "properties": {
+                        "@type": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "contains": {
+                            "const": "cdi:ComponentPosition"
+                          },
+                          "minItems": 1
+                        },
+                        "@id": {
+                          "type": "string",
+                          "description": "Identifier for this ComponentPosition node."
+                        },
+                        "cdi:indexes": {
+                          "$ref": "#/$defs/ObjectReference",
+                          "description": "The variable this position indexes -- an @id-reference to one declared elsewhere in the document, matching cdi:indexes on PrimaryKey. A key names variables that are defined once and referenced from the key, so an inline variable here would be a second copy of a node that already exists; framing inlines the target and the embedded copy then had to be told apart from authored content."
+                        },
+                        "cdi:value": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "default": 1,
+                          "description": "1-based position of this variable in the ordered key."
+                        }
+                      },
+                      "required": [
+                        "@type",
+                        "cdi:indexes",
+                        "cdi:value"
+                      ]
+                    }
+                  },
+                  "cdif:references_PrimaryKey": {
+                    "$ref": "#/$defs/ObjectReference",
+                    "description": "references a primary key in a different dataset"
+                  }
+                },
+                "required": [
+                  "@type",
+                  "cdif:isComposedOf",
+                  "cdif:references_PrimaryKey"
+                ]
               },
               {
                 "$ref": "#/$defs/ObjectReference"
@@ -1180,75 +1274,6 @@
       "required": [
         "@type",
         "cdi:has_DataStructureComponent"
-      ]
-    },
-    "ForeignKey": {
-      "type": "object",
-      "description": "A set of variables whose values reference a primary key elsewhere. cdif:, not cdi:, throughout: this is a CDIF simplification, not the DDI-CDI shape. DDI-CDI composes a foreign key from cdi:ForeignKeyComponent nodes, each with cdi:correspondsTo and cdi:references; this form composes the variables directly, each carrying cdif:position. The prefix is what makes that divergence visible, and it matches the sibling cdif:Key. Until 2026-09-05 the definition required 'cdif:isComposedOf' while declaring 'cdi:isComposedOf', so it could only be satisfied by an undeclared and therefore unconstrained property.",
-      "properties": {
-        "@type": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "contains": {
-            "const": "cdif:ForeignKey"
-          },
-          "minItems": 1
-        },
-        "@id": {
-          "type": "string",
-          "description": "Identifier for this ForeignKey node"
-        },
-        "cdif:isComposedOf": {
-          "type": "array",
-          "minItems": 1,
-          "description": "Ordered list of cdi:ComponentPosition wrappers, one per key component, matching the sibling cdif:Key. The position sits on the wrapper rather than on the variable, and that is load-bearing: an earlier form required cdif:position on the item itself, which made the objectReference branch unsatisfiable, because objectReference is sealed with additionalProperties false. A key could then only be written by inlining whole variables, duplicating what schema:variableMeasured already holds.",
-          "items": {
-            "type": "object",
-            "description": "cdi:ComponentPosition wrapper indexing one variable's position in the key.",
-            "properties": {
-              "@type": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "contains": {
-                  "const": "cdi:ComponentPosition"
-                },
-                "minItems": 1
-              },
-              "@id": {
-                "type": "string",
-                "description": "Identifier for this ComponentPosition node."
-              },
-              "cdi:indexes": {
-                "$ref": "#/$defs/ObjectReference",
-                "description": "The variable this position indexes -- an @id-reference to one declared elsewhere in the document, matching cdi:indexes on PrimaryKey. A key names variables that are defined once and referenced from the key, so an inline variable here would be a second copy of a node that already exists; framing inlines the target and the embedded copy then had to be told apart from authored content."
-              },
-              "cdi:value": {
-                "type": "integer",
-                "minimum": 1,
-                "default": 1,
-                "description": "1-based position of this variable in the ordered key."
-              }
-            },
-            "required": [
-              "@type",
-              "cdi:indexes",
-              "cdi:value"
-            ]
-          }
-        },
-        "cdif:references_PrimaryKey": {
-          "$ref": "#/$defs/ObjectReference",
-          "description": "references a primary key in a different dataset"
-        }
-      },
-      "required": [
-        "@type",
-        "cdif:isComposedOf",
-        "cdif:references_PrimaryKey"
       ]
     },
     "IdentifierComponent": {
@@ -1350,7 +1375,36 @@
                     "$ref": "#/$defs/MeasureComponent"
                   },
                   {
-                    "$ref": "#/$defs/DimensionComponent"
+                    "description": "Role given to a represented variable in the context of a dimensional data structure to identify the universes associated with data points. The variable acts as a field in the compound identifier (the key structure) to disambiguate the cells in the multi-dimensional \"cube\".  AG: references to the variables which are the components of a compound identifier, in which each variable is a single field - an axis - in a coordinate system addressing a location in a matrix. These variables are often categorical, but also commonly include time. Unlike other Components, they may be ordered using instances of cdi:ComponentPosition.",
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/DataStructureComponent"
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "contains": {
+                              "const": "cdi:DimensionComponent"
+                            },
+                            "minItems": 1
+                          },
+                          "cdif:categoricalAdditivity": {
+                            "type": "boolean",
+                            "default": false,
+                            "description": "Indicates whether categories at a specific level can be combined to provide the value for their shared parent category. Value is True if categories can be added together (collapsed) to create higher-level categories. An example would be age categories: five-year age categories can be collapsed into 10-year age categories."
+                          }
+                        },
+                        "required": [
+                          "@type",
+                          "cdif:isDefinedBy_Variable"
+                        ]
+                      }
+                    ]
                   },
                   {
                     "$ref": "#/$defs/VariableValueComponent"
@@ -1368,38 +1422,6 @@
           },
           "required": [
             "@type"
-          ]
-        }
-      ]
-    },
-    "DimensionComponent": {
-      "description": "Role given to a represented variable in the context of a dimensional data structure to identify the universes associated with data points. The variable acts as a field in the compound identifier (the key structure) to disambiguate the cells in the multi-dimensional \"cube\".  AG: references to the variables which are the components of a compound identifier, in which each variable is a single field - an axis - in a coordinate system addressing a location in a matrix. These variables are often categorical, but also commonly include time. Unlike other Components, they may be ordered using instances of cdi:ComponentPosition.",
-      "allOf": [
-        {
-          "$ref": "#/$defs/DataStructureComponent"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "contains": {
-                "const": "cdi:DimensionComponent"
-              },
-              "minItems": 1
-            },
-            "cdif:categoricalAdditivity": {
-              "type": "boolean",
-              "default": false,
-              "description": "Indicates whether categories at a specific level can be combined to provide the value for their shared parent category. Value is True if categories can be added together (collapsed) to create higher-level categories. An example would be age categories: five-year age categories can be collapsed into 10-year age categories."
-            }
-          },
-          "required": [
-            "@type",
-            "cdif:isDefinedBy_Variable"
           ]
         }
       ]
